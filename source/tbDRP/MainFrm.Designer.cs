@@ -30,6 +30,7 @@
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.BtnStart = new System.Windows.Forms.Button();
+            this.BtnTitle = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -51,11 +52,22 @@
             this.BtnStart.UseVisualStyleBackColor = true;
             this.BtnStart.Click += new System.EventHandler(this.BtnStart_Click);
             // 
+            // BtnTitle
+            // 
+            this.BtnTitle.Location = new System.Drawing.Point(12, 170);
+            this.BtnTitle.Name = "BtnTitle";
+            this.BtnTitle.Size = new System.Drawing.Size(75, 23);
+            this.BtnTitle.TabIndex = 2;
+            this.BtnTitle.Text = "标题";
+            this.BtnTitle.UseVisualStyleBackColor = true;
+            this.BtnTitle.Click += new System.EventHandler(this.BtnTitle_Click);
+            // 
             // MainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(366, 214);
+            this.Controls.Add(this.BtnTitle);
             this.Controls.Add(this.BtnStart);
             this.Controls.Add(this.groupBox1);
             this.Name = "MainFrm";
@@ -68,6 +80,7 @@
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button BtnStart;
+        private System.Windows.Forms.Button BtnTitle;
     }
 }
 

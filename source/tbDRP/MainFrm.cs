@@ -31,6 +31,14 @@ namespace tbDRP
             }
         }
 
+        private void BtnTitle_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            TongKuanFrm form = new TongKuanFrm();
+            form.ShowDialog();
+            this.Show();
+        }
+
 
     }
 }

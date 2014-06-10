@@ -16,7 +16,7 @@ namespace tbDRP
         {
             NetDataManager.UseSpicalEncoding("gb2312");
 
-            //tbDRP.TongKuan.TongKuanManager.GetNewTitle("beccacool/贝卡酷");
+            
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
