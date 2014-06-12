@@ -37,6 +37,9 @@
     <Reference Include="log4net">
       <HintPath>..\Lib\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="MT.WindowsUI">
+      <HintPath>..\Lib\MT.WindowsUI.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -48,22 +51,61 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WeifenLuo.WinFormsUI.Docking">
+      <HintPath>..\Lib\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context.cs" />
+    <Compile Include="Dock\DockDocumentFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dock\IMEConversionFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dock\MainDockFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HomeFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HomeFrm.Designer.cs">
+      <DependentUpon>HomeFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Http\ConditionInfo.cs" />
     <Compile Include="Http\ContentInfo.cs" />
     <Compile Include="Http\NetDataManager.cs" />
     <Compile Include="Http\NetResponse.cs" />
     <Compile Include="Http\RegexUtils.cs" />
+    <Compile Include="LeftMenuFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginFrm.Designer.cs">
+      <DependentUpon>LoginFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainFrm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainFrm.Designer.cs">
       <DependentUpon>MainFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="WelcomeFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WelcomeFrm.Designer.cs">
+      <DependentUpon>WelcomeFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TaobaoLoginFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TaobaoLoginFrm.Designer.cs">
+      <DependentUpon>TaobaoLoginFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="TongKuanFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,8 +113,21 @@
       <DependentUpon>TongKuanFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="TongKuan\TongKuanManager.cs" />
+    <Compile Include="WebBrowserManager.cs" />
+    <EmbeddedResource Include="HomeFrm.resx">
+      <DependentUpon>HomeFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LeftMenuFrm.resx">
+      <DependentUpon>LeftMenuFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginFrm.resx">
+      <DependentUpon>LoginFrm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainFrm.resx">
       <DependentUpon>MainFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WelcomeFrm.resx">
+      <DependentUpon>WelcomeFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -84,6 +139,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="TaobaoLoginFrm.resx">
+      <DependentUpon>TaobaoLoginFrm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TongKuanFrm.resx">
       <DependentUpon>TongKuanFrm.cs</DependentUpon>
     </EmbeddedResource>

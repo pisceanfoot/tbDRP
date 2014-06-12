@@ -41,7 +41,7 @@ namespace tbDRP.TongKuan
             if(NetDataManager.GetMainPage(url, out content))
             {
                 string body = NetDataManager.GetContent(content, "class=\"tb-content\"", "class=\"list-view newsrp-i2i-listcontent-el\"", "<div class=\"tb-bottom\">");
-                string matchString = " <h3 class=\"summary\">\\n*\\s*\\<a[^>]+>\\n*\\s*(?<title>.*?)\\n*\\s*</a>";
+                string matchString = "<h3 class=\"summary\">\\n*\\s*\\<a[^>]+>\\n*\\s*(?<title>.*?)\\n*\\s*</a>";
                 Match match = Regex.Match(body, matchString);
                 if (match.Success)
                 {

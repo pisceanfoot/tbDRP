@@ -16,8 +16,6 @@ namespace tbDRP
         {
             NetDataManager.UseSpicalEncoding("gb2312");
 
-            
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainFrm());
