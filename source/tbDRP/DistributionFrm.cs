@@ -17,6 +17,11 @@ namespace tbDRP
             InitializeComponent();
         }
 
+        private void LoadOfflineProduct(int pageIndex)
+        {
+
+        }
+
 
     }
 }

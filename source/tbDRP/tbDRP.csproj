@@ -76,6 +76,8 @@
     <Compile Include="DistributionFrm.Designer.cs">
       <DependentUpon>DistributionFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="FenXiaoShangPin\FenXiaoManager.cs" />
+    <Compile Include="FenXiaoShangPin\FenXiaoModel.cs" />
     <Compile Include="HomeFrm.cs">
       <SubType>Form</SubType>
     </Compile>
