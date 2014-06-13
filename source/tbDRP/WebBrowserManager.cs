@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using tbDRP.Browse;
 
 namespace tbDRP
 {
@@ -10,19 +11,19 @@ namespace tbDRP
     {
 
 
-        private WebBrowser webBrowser;
+        private WebBrowserEx webBrowser;
 
         public WebBrowserManager()
         {
-            this.webBrowser = new WebBrowser();
+            this.webBrowser = new WebBrowserEx();
         }
 
-        public WebBrowserManager(WebBrowser webBrowser)
+        public WebBrowserManager(WebBrowserEx webBrowser)
         {
             this.webBrowser = webBrowser;
         }
 
-        public WebBrowser Browser
+        public WebBrowserEx Browser
         {
             get { return this.webBrowser; }
         }

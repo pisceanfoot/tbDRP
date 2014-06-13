@@ -29,7 +29,9 @@ namespace tbDRP
             leftMenuFrm.DockAreas = DockAreas.DockLeft;
             leftMenuFrm.Show(this.MainDockPanel);
 
-            welcomeFrm.Show(this.MainDockPanel);
+            //welcomeFrm.Show(this.MainDockPanel);
+
+            DockContext.Current = new DockContext(this.MainDockPanel);
         }
     }
 }

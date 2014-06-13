@@ -56,7 +56,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Browse\WebBrowserEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Context.cs" />
+    <Compile Include="DockContext.cs" />
     <Compile Include="Dock\DockDocumentFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -65,6 +69,12 @@
     </Compile>
     <Compile Include="Dock\MainDockFrm.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DistributionFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DistributionFrm.Designer.cs">
+      <DependentUpon>DistributionFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="HomeFrm.cs">
       <SubType>Form</SubType>
@@ -80,6 +90,9 @@
     <Compile Include="LeftMenuFrm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="LeftMenuFrm.Designer.cs">
+      <DependentUpon>LeftMenuFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,6 +104,18 @@
     </Compile>
     <Compile Include="MainFrm.Designer.cs">
       <DependentUpon>MainFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCFenXiao.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCFenXiao.Designer.cs">
+      <DependentUpon>UCFenXiao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCTaobaoLogin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCTaobaoLogin.Designer.cs">
+      <DependentUpon>UCTaobaoLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="WelcomeFrm.cs">
       <SubType>Form</SubType>
@@ -114,6 +139,9 @@
     </Compile>
     <Compile Include="TongKuan\TongKuanManager.cs" />
     <Compile Include="WebBrowserManager.cs" />
+    <EmbeddedResource Include="DistributionFrm.resx">
+      <DependentUpon>DistributionFrm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HomeFrm.resx">
       <DependentUpon>HomeFrm.cs</DependentUpon>
     </EmbeddedResource>
@@ -125,6 +153,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainFrm.resx">
       <DependentUpon>MainFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UCTaobaoLogin.resx">
+      <DependentUpon>UCTaobaoLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WelcomeFrm.resx">
       <DependentUpon>WelcomeFrm.cs</DependentUpon>

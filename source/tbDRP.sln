@@ -3,6 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tbDRP", "tbDRP\tbDRP.csproj", "{E0CECFB6-681C-4652-8707-B21F0BD5EE23}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{3D770F03-3D0E-4E3C-A7C0-8D083AA5310B}"
+	ProjectSection(SolutionItems) = preProject
+		Lib\log4net.dll = Lib\log4net.dll
+		Lib\MT.WindowsUI.dll = Lib\MT.WindowsUI.dll
+		Lib\WeifenLuo.WinFormsUI.Docking.dll = Lib\WeifenLuo.WinFormsUI.Docking.dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

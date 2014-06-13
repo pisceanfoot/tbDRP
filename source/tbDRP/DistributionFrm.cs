@@ -6,23 +6,17 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using MT.WindowsUI.NavigationPane;
 using tbDRP.Dock;
-using tbDRP.UserControls;
 
 namespace tbDRP
 {
-    public partial class LeftMenuFrm : DockDocumentFrm
+    public partial class DistributionFrm : DockDocumentFrm
     {
-        public LeftMenuFrm()
+        public DistributionFrm()
         {
             InitializeComponent();
-            Init();
         }
 
-        private void Init()
-        {
-            this.navBtnTaobaoLogin.RelatedControl = new UCTaobaoLogin();
-        }
+
     }
 }
