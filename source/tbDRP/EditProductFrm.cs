@@ -13,6 +13,7 @@ namespace tbDRP
 {
     public partial class EditProductFrm : DockDocumentFrm
     {
+        private Timer timer;
         private WebBrowserManager editProductBrowser;
         private DistributionFrm parentFrm;
 
@@ -27,6 +28,24 @@ namespace tbDRP
 
             this.editProductBrowser.Browser.Dock = DockStyle.Fill;
             this.Controls.Add(this.editProductBrowser.Browser);
+
+            timer = new Timer();
+            timer.Interval = 800;
+            timer.Tick += timer_Tick;
+            timer.Enabled = false;
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            timer.Enabled = false;
+
+            if (!this.editProductBrowser.Browser.Busy)
+            {
+                this.parentFrm.SetOnSell();
+                return;
+            }
+
+            timer.Enabled = true;
         }
 
         private void editProductBrowser_DocumentComplete(Browse.WebBrowserEx browser)
@@ -50,6 +69,8 @@ namespace tbDRP
 
             HtmlElement submit = browser.Document.GetElementById("event_submit_do_edit");
             ClickHelemnt(submit);
+
+            this.timer.Start();
         }
 
         public void Run(FenXiaoModel model)

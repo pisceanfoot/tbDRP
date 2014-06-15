@@ -146,11 +146,7 @@ namespace tbDRP
             for (; onSellClickIndex < list.Count; onSellClickIndex++)
             {
                 FenXiaoModel model = list[onSellClickIndex];
-                if (string.IsNullOrEmpty(model.TitleStatus))
-                {
-                    continue;
-                }
-                else
+                if (!string.IsNullOrEmpty(model.TitleStatus))
                 {
                     string title = TongKuan.TongKuanManager.GetNewTitle(model.Title);
                     if (string.IsNullOrEmpty(title))
@@ -159,19 +155,21 @@ namespace tbDRP
                     }
 
                     model.NewTitle = title;
-                    onSellClickIndex++;
-
-                    if (editProductFrm == null || editProductFrm.IsDisposed)
-                    {
-                        editProductFrm = DockContext.Current.Show(typeof(EditProductFrm), this) as EditProductFrm;
-                    }
-                    else
-                    {
-                        editProductFrm.Show();
-                    }
-                    editProductFrm.Run(model);
-                    break;
+                    
                 }
+
+                onSellClickIndex++;
+
+                if (editProductFrm == null || editProductFrm.IsDisposed)
+                {
+                    editProductFrm = DockContext.Current.Show(typeof(EditProductFrm), this) as EditProductFrm;
+                }
+                else
+                {
+                    editProductFrm.Show();
+                }
+                editProductFrm.Run(model);
+                break;
             }
         }
     }
