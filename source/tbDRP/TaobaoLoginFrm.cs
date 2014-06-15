@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using tbDRP.Browse;
 using tbDRP.Dock;
 
 namespace tbDRP
@@ -30,14 +31,15 @@ namespace tbDRP
             this.Controls.Add(webBrowser);
 
             // 登录成功后跳转到分销页面
-            webBrowser.Navigate("https://login.taobao.com/member/login.jhtml?redirectURL=http%3a%2f%2fgongxiao.tmall.com%2fdistributor%2findex.htm");
+            //webBrowser.Navigate("https://login.taobao.com/member/login.jhtml?redirectURL=http%3a%2f%2fgoods.gongxiao.tmall.com%2fdistributor%2fitem%2fmy_item_list.htm%3fonSale%3d0");
+            webBrowser.Navigate("http://goods.gongxiao.tmall.com/distributor/item/my_item_list.htm?onSale=0");
             webBrowser.DocumentCompleted += webBrowser_DocumentCompleted;
             
         }
 
         void webBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            WebBrowser webBrowser = sender as WebBrowser;
+            WebBrowserEx webBrowser = sender as WebBrowserEx;
             if (webBrowser.ReadyState == WebBrowserReadyState.Complete)
             {
                 if (e.Url.AbsolutePath != webBrowser.Url.AbsolutePath)
@@ -45,8 +47,9 @@ namespace tbDRP
 
                 if (webBrowser.Url.AbsolutePath.Contains("distributor"))
                 {
-                    DockContext.Current.Show(typeof(WelcomeFrm));
-                    this.Close();
+                    webBrowser.DocumentCompleted -= webBrowser_DocumentCompleted;
+                    DockContext.Current.Show(typeof(DistributionFrm), webBrowser);
+                    //this.Close();
                 }
             }
         }

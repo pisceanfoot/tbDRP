@@ -76,6 +76,12 @@
     <Compile Include="DistributionFrm.Designer.cs">
       <DependentUpon>DistributionFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="EditProductFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditProductFrm.Designer.cs">
+      <DependentUpon>EditProductFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="FenXiaoShangPin\FenXiaoManager.cs" />
     <Compile Include="FenXiaoShangPin\FenXiaoModel.cs" />
     <Compile Include="HomeFrm.cs">
@@ -143,6 +149,9 @@
     <Compile Include="WebBrowserManager.cs" />
     <EmbeddedResource Include="DistributionFrm.resx">
       <DependentUpon>DistributionFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditProductFrm.resx">
+      <DependentUpon>EditProductFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HomeFrm.resx">
       <DependentUpon>HomeFrm.cs</DependentUpon>

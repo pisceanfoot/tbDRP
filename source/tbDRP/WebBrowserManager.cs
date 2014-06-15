@@ -9,7 +9,7 @@ namespace tbDRP
 {
     public class WebBrowserManager
     {
-
+        public event Action<WebBrowserEx> DocumentComplete;
 
         private WebBrowserEx webBrowser;
 
@@ -30,7 +30,25 @@ namespace tbDRP
 
         public void Navigate(string url)
         {
+            
             this.webBrowser.Navigate(url);
+            this.webBrowser.DocumentCompleted += webBrowser_DocumentCompleted;
+        }
+
+        private void webBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            WebBrowserEx webBrowser = sender as WebBrowserEx;
+            if (webBrowser.ReadyState == WebBrowserReadyState.Complete)
+            {
+                if (e.Url.AbsolutePath != webBrowser.Url.AbsolutePath)
+                    return;
+
+                webBrowser.DocumentCompleted -= webBrowser_DocumentCompleted;
+                if (DocumentComplete != null)
+                {
+                    DocumentComplete(webBrowser);
+                }
+            }
         }
     }
 }

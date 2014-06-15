@@ -23,7 +23,7 @@ namespace tbDRP
             ((DockContent)form).Show(this.mainDockPanel);
         }
 
-        public void Show(Type type)
+        public DockContent Show(Type type, params object[] args)
         {
             DockContent form;
             if (formContainer.ContainsKey(type))
@@ -32,17 +32,16 @@ namespace tbDRP
             }
             else
             {
-                form = (DockContent)Activator.CreateInstance(type);
+                form = (DockContent)Activator.CreateInstance(type, args);
                 formContainer.Add(type, form);
             }
 
-            ((DockContent)form).Show(this.mainDockPanel);
+            form.Show(this.mainDockPanel);
+            return form;
         }
 
         #region Forms
         private Dictionary<Type, DockContent> formContainer = new Dictionary<Type, DockContent>();
-        private DistributionFrm distributionFrm;                // 分销
-
         #endregion
     }
 }
