@@ -52,6 +52,10 @@ namespace tbDRP.Browse
             this.ScriptErrorsSuppressed = true;
         }
 
+        public string Info { get; set; }
+
+        public int TryCount { get; set; }
+
         public string NextUrl { get; set; }
 
         public bool Busy { get; set; }

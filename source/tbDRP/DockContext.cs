@@ -25,12 +25,18 @@ namespace tbDRP
 
         public DockContent Show(Type type, params object[] args)
         {
-            DockContent form;
+            DockContent form = null;
             if (formContainer.ContainsKey(type))
             {
                 form = formContainer[type];
             }
-            else
+            if (form != null && form.IsDisposed)
+            {
+                formContainer.Remove(type);
+                form = null;
+            }
+
+            if(form == null)
             {
                 form = (DockContent)Activator.CreateInstance(type, args);
                 formContainer.Add(type, form);
@@ -38,6 +44,27 @@ namespace tbDRP
 
             form.Show(this.mainDockPanel);
             return form;
+        }
+
+        public void Close(Type type)
+        {
+            if (formContainer.ContainsKey(type))
+            {
+                DockContent form = formContainer[type];
+                formContainer.Remove(type);
+
+                form.Close();
+                form = null;
+            }
+        }
+
+        public void Hide(Type type)
+        {
+            if (formContainer.ContainsKey(type))
+            {
+                DockContent form = formContainer[type];
+                form.Hide();
+            }
         }
 
         #region Forms

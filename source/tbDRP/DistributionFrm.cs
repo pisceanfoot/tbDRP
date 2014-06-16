@@ -15,26 +15,24 @@ namespace tbDRP
 {
     public partial class DistributionFrm : DockDocumentFrm
     {
-        private const string url = "http://goods.gongxiao.tmall.com/distributor/item/my_item_list.htm?onSale=0";
-        private WebBrowserManager manager;
+        private const string URL = "http://goods.gongxiao.tmall.com/distributor/item/my_item_list.htm?onSale=0";
         private WebBrowserEx webBrowser;
+        private List<FenXiaoModel> allProductList;
+        private Timer timer;
 
-        public DistributionFrm()
-        {
-            InitializeComponent();
-        }
-
-        private string html;
         public DistributionFrm(WebBrowserEx webBrowser)
         {
             InitializeComponent();
 
-            this.webBrowser = webBrowser;
-            manager = new WebBrowserManager(webBrowser);
-            Init(webBrowser);
+            this.allProductList = new List<FenXiaoModel>();
+
+            this.timer = new Timer();
+            this.timer.Tick += timer_Tick;
+            this.timer.Interval = 500;
+            this.timer.Enabled = false;
         }
 
-        private void Init(WebBrowserEx webBrowser)
+        private string Init(WebBrowserEx webBrowser)
         {
             Stream stream = webBrowser.DocumentStream;
             stream.Position = 0;
@@ -42,18 +40,76 @@ namespace tbDRP
 
             stream.Read(buffer, 0, buffer.Length);
 
-            html = Context.HttpEncoding.GetString(buffer);
-        }
-
-        private void LoadOfflineProduct()
-        {
-            List<FenXiaoModel> list = FenXiaoManager.SplitTable(html);
-            if (list == null || list.Count == 0)
+            string documentHtml = Context.HttpEncoding.GetString(buffer);
+            List<FenXiaoModel> tmp = ConvertOfflineProduct(documentHtml);
+            if (tmp != null && tmp.Count > 0)
             {
-                return;
+                BindFenXiaoListView(tmp);
+
+                this.allProductList.AddRange(tmp);
             }
 
-            BindFenXiaoListView(list);
+            return documentHtml;
+        }
+
+        private List<FenXiaoModel> ConvertOfflineProduct(string html)
+        {
+            List<FenXiaoModel> list = FenXiaoManager.SplitTable(html);
+            return list;
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            this.timer.Enabled = false;
+            
+            LoadAllOfflineProduct();
+        }
+
+        private void LoadAllOfflineProduct()
+        {
+            allProductList.Clear();
+            this.listView.Items.Clear();
+
+            webBrowser = new WebBrowserEx();
+            webBrowser.Navigate(URL);
+            webBrowser.DocumentCompleted += webBrowser_DocumentCompleted;
+        }
+
+        private void webBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            WebBrowserEx webBrowser = sender as WebBrowserEx;
+            if (webBrowser.ReadyState == WebBrowserReadyState.Complete)
+            {
+                if (e.Url.AbsolutePath != webBrowser.Url.AbsolutePath)
+                    return;
+
+                if (webBrowser.Url.AbsolutePath.Contains("distributor"))
+                {
+                    string html = Init(webBrowser);
+
+                    // next page
+                    if (html.IndexOf("class=\"page-next\"") != -1)
+                    {
+                        WebBrowserManager m = new WebBrowserManager(this.webBrowser);
+                        var pageContainer = m.FindID("dpl:pagination");
+                        if (pageContainer != null)
+                        {
+                            pageContainer = m.FindClassName("page-next", pageContainer);
+                        }
+                        if (pageContainer != null)
+                        {
+                            m.ClickHelemnt(pageContainer);
+                        }
+
+                        this.TabText = "商品分销管理(加载中 ... ...)";
+                    }
+                    else
+                    {
+                        webBrowser.DocumentCompleted -= webBrowser_DocumentCompleted;
+                        this.TabText = "商品分销管理(加载完成)";
+                    }
+                }
+            }
         }
 
         private void BindFenXiaoListView(List<FenXiaoModel> list)
@@ -64,9 +120,6 @@ namespace tbDRP
             }
             else
             {
-                this.listView.Items.Clear();
-                this.listView.Tag = list;
-
                 foreach (FenXiaoModel model in list)
                 {
                     ListViewItem item = new ListViewItem(model.Title);
@@ -85,37 +138,13 @@ namespace tbDRP
 
         private void DistributionFrm_Load(object sender, EventArgs e)
         {
-            this.BeginInvoke(new Action(LoadOfflineProduct));
+            this.timer.Start();
         }
 
         private void BtnRefresh_Click(object sender, EventArgs e)
         {
-            webBrowser = new WebBrowserEx();
-            webBrowser.Navigate(url);
-            webBrowser.DocumentCompleted += webBrowser_DocumentCompleted;
-        }
-
-        void webBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {
-            WebBrowserEx webBrowser = sender as WebBrowserEx;
-            if (webBrowser.ReadyState == WebBrowserReadyState.Complete)
-            {
-                if (e.Url.AbsolutePath != webBrowser.Url.AbsolutePath)
-                    return;
-
-                if (webBrowser.Url.AbsolutePath.Contains("distributor"))
-                {
-                    webBrowser.DocumentCompleted -= webBrowser_DocumentCompleted;
-                    Init(webBrowser);
-
-                    this.BeginInvoke(new Action(LoadOfflineProduct));
-                }
-            }
-        }
-
-        private void BtnChangeTitle_Click(object sender, EventArgs e)
-        {
             
+            this.timer.Start();
         }
 
         private int onSellClickIndex = 0;
@@ -130,7 +159,7 @@ namespace tbDRP
         private EditProductFrm editProductFrm = null;
         public void SetOnSell()
         {
-            List<FenXiaoModel> list = this.listView.Tag as List<FenXiaoModel>;
+            List<FenXiaoModel> list = this.allProductList;
 
             if (list == null || list.Count == 0)
             {
@@ -140,10 +169,17 @@ namespace tbDRP
             if (onSellClickIndex >= list.Count)
             {
                 BtnOnSell.Enabled = true;
+
+                if (editProductFrm != null && !editProductFrm.IsDisposed)
+                {
+                    DockContext.Current.Close(typeof(EditProductFrm));
+                    this.editProductFrm = null;
+                }
+
                 return;
             }
 
-            for (; onSellClickIndex < list.Count; onSellClickIndex++)
+            for (; onSellClickIndex < list.Count; )
             {
                 FenXiaoModel model = list[onSellClickIndex];
                 if (!string.IsNullOrEmpty(model.TitleStatus))
@@ -151,11 +187,14 @@ namespace tbDRP
                     string title = TongKuan.TongKuanManager.GetNewTitle(model.Title);
                     if (string.IsNullOrEmpty(title))
                     {
-                        continue;
+                        // 商家原始名称
+                        model.NewTitle = model.Title;
                     }
-
-                    model.NewTitle = title;
-                    
+                    else
+                    {
+                        // 同款销量高的名称
+                        model.NewTitle = title;
+                    }
                 }
 
                 onSellClickIndex++;
@@ -166,7 +205,10 @@ namespace tbDRP
                 }
                 else
                 {
-                    editProductFrm.Show();
+                    if (!editProductFrm.Visible)
+                    {
+                        editProductFrm.Show();
+                    }
                 }
                 editProductFrm.Run(model);
                 break;

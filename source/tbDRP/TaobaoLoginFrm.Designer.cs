@@ -36,7 +36,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(660, 465);
             this.Name = "TaobaoLoginFrm";
-            this.Text = "TaobaoLoginFrm";
+            this.Text = "淘宝登录";
             this.ResumeLayout(false);
 
         }

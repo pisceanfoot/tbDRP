@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.BtnOnSell = new System.Windows.Forms.Button();
+            this.BtnChangeTitle = new System.Windows.Forms.Button();
             this.BtnRefresh = new System.Windows.Forms.Button();
             this.listView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -38,9 +40,6 @@
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.BtnChangeTitle = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.BtnOnSell = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -57,7 +56,6 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.BtnOnSell);
-            this.splitContainer1.Panel1.Controls.Add(this.button1);
             this.splitContainer1.Panel1.Controls.Add(this.BtnChangeTitle);
             this.splitContainer1.Panel1.Controls.Add(this.BtnRefresh);
             // 
@@ -67,6 +65,25 @@
             this.splitContainer1.Size = new System.Drawing.Size(962, 610);
             this.splitContainer1.SplitterDistance = 107;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // BtnOnSell
+            // 
+            this.BtnOnSell.Location = new System.Drawing.Point(214, 26);
+            this.BtnOnSell.Name = "BtnOnSell";
+            this.BtnOnSell.Size = new System.Drawing.Size(75, 50);
+            this.BtnOnSell.TabIndex = 0;
+            this.BtnOnSell.Text = "上架";
+            this.BtnOnSell.UseVisualStyleBackColor = true;
+            this.BtnOnSell.Click += new System.EventHandler(this.BtnOnSell_Click);
+            // 
+            // BtnChangeTitle
+            // 
+            this.BtnChangeTitle.Location = new System.Drawing.Point(121, 26);
+            this.BtnChangeTitle.Name = "BtnChangeTitle";
+            this.BtnChangeTitle.Size = new System.Drawing.Size(75, 50);
+            this.BtnChangeTitle.TabIndex = 0;
+            this.BtnChangeTitle.Text = "修改标题";
+            this.BtnChangeTitle.UseVisualStyleBackColor = true;
             // 
             // BtnRefresh
             // 
@@ -132,36 +149,6 @@
             this.columnHeader7.Text = "标题状态";
             this.columnHeader7.Width = 86;
             // 
-            // BtnChangeTitle
-            // 
-            this.BtnChangeTitle.Location = new System.Drawing.Point(121, 26);
-            this.BtnChangeTitle.Name = "BtnChangeTitle";
-            this.BtnChangeTitle.Size = new System.Drawing.Size(75, 50);
-            this.BtnChangeTitle.TabIndex = 0;
-            this.BtnChangeTitle.Text = "修改标题";
-            this.BtnChangeTitle.UseVisualStyleBackColor = true;
-            this.BtnChangeTitle.Click += new System.EventHandler(this.BtnChangeTitle_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(121, 26);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 50);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "修改标题";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.BtnChangeTitle_Click);
-            // 
-            // BtnOnSell
-            // 
-            this.BtnOnSell.Location = new System.Drawing.Point(214, 26);
-            this.BtnOnSell.Name = "BtnOnSell";
-            this.BtnOnSell.Size = new System.Drawing.Size(75, 50);
-            this.BtnOnSell.TabIndex = 0;
-            this.BtnOnSell.Text = "上架";
-            this.BtnOnSell.UseVisualStyleBackColor = true;
-            this.BtnOnSell.Click += new System.EventHandler(this.BtnOnSell_Click);
-            // 
             // DistributionFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -169,7 +156,6 @@
             this.ClientSize = new System.Drawing.Size(962, 610);
             this.Controls.Add(this.splitContainer1);
             this.Name = "DistributionFrm";
-            this.TabText = "FenXiaoProductFrm";
             this.Text = "下架商品列表";
             this.Load += new System.EventHandler(this.DistributionFrm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -194,6 +180,5 @@
         private System.Windows.Forms.Button BtnRefresh;
         private System.Windows.Forms.Button BtnChangeTitle;
         private System.Windows.Forms.Button BtnOnSell;
-        private System.Windows.Forms.Button button1;
     }
 }

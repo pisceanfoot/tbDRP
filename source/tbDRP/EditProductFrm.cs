@@ -13,7 +13,8 @@ namespace tbDRP
 {
     public partial class EditProductFrm : DockDocumentFrm
     {
-        private Timer timer;
+        private Timer checkDownTimer;
+        private Timer clickTimer;
         private WebBrowserManager editProductBrowser;
         private DistributionFrm parentFrm;
 
@@ -29,48 +30,60 @@ namespace tbDRP
             this.editProductBrowser.Browser.Dock = DockStyle.Fill;
             this.Controls.Add(this.editProductBrowser.Browser);
 
-            timer = new Timer();
-            timer.Interval = 800;
-            timer.Tick += timer_Tick;
-            timer.Enabled = false;
+            checkDownTimer = new Timer();
+            checkDownTimer.Interval = 800;
+            checkDownTimer.Tick += checkDownTimer_Tick;
+            checkDownTimer.Enabled = false;
+
+            this.clickTimer = new Timer();
+            this.clickTimer.Tick += clickTimer_Tick;
+            this.clickTimer.Interval = 700;
+            this.clickTimer.Enabled = false;
         }
 
-        private void timer_Tick(object sender, EventArgs e)
+        private void clickTimer_Tick(object sender, EventArgs e)
         {
-            timer.Enabled = false;
+            this.clickTimer.Enabled = false;
 
-            if (!this.editProductBrowser.Browser.Busy)
-            {
-                this.parentFrm.SetOnSell();
-                return;
-            }
-
-            timer.Enabled = true;
-        }
-
-        private void editProductBrowser_DocumentComplete(Browse.WebBrowserEx browser)
-        {
-            FenXiaoModel model = browser.Tag as FenXiaoModel;
+            FenXiaoModel model = this.editProductBrowser.Browser.Tag as FenXiaoModel;
             if (model == null)
             {
                 return;
             }
 
-            // set title
-            Application.DoEvents(); 
-            System.Threading.Thread.Sleep(1000);
-            Application.DoEvents();
-
             if (!string.IsNullOrEmpty(model.TitleStatus))
             {
-                HtmlElement element = browser.Document.GetElementById("TitleID");
+                HtmlElement element = this.editProductBrowser.Browser.Document.GetElementById("TitleID");
                 element.SetAttribute("value", model.NewTitle);
             }
 
-            HtmlElement submit = browser.Document.GetElementById("event_submit_do_edit");
+            HtmlElement submit = this.editProductBrowser.Browser.Document.GetElementById("event_submit_do_edit");
             ClickHelemnt(submit);
 
-            this.timer.Start();
+            this.checkDownTimer.Start();
+        }
+
+        private void checkDownTimer_Tick(object sender, EventArgs e)
+        {
+            checkDownTimer.Enabled = false;
+
+            if (!this.editProductBrowser.Browser.Busy)
+            {
+                if (this.editProductBrowser.Browser.Url.AbsolutePath.IndexOf("item.htm?id=") != -1)
+                {
+
+                }
+
+                this.parentFrm.SetOnSell();
+                return;
+            }
+
+            checkDownTimer.Enabled = true;
+        }
+
+        private void editProductBrowser_DocumentComplete(Browse.WebBrowserEx browser)
+        {
+            this.clickTimer.Start();
         }
 
         public void Run(FenXiaoModel model)

@@ -13,6 +13,11 @@ namespace tbDRP.Dock
         {
             base.AllowEndUserDocking = false;
             base.DockAreas = DockAreas.Document;
+
+            if (string.IsNullOrEmpty(this.TabText))
+            {
+                this.TabText = this.Text;
+            }
         }
     }
 }
