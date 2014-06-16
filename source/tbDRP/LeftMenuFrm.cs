@@ -23,6 +23,7 @@ namespace tbDRP
         private void Init()
         {
             this.navBtnTaobaoLogin.RelatedControl = new UCTaobaoLogin();
+            this.navBtnFenXiao.RelatedControl = new UCFenXiao();
         }
     }
 }

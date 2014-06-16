@@ -48,7 +48,7 @@ namespace tbDRP
                 if (webBrowser.Url.AbsolutePath.Contains("distributor"))
                 {
                     webBrowser.DocumentCompleted -= webBrowser_DocumentCompleted;
-                    DockContext.Current.Show(typeof(DistributionFrm), webBrowser);
+                    DockContext.Current.Show(typeof(DistributionFrm));
                     //this.Close();
                 }
             }

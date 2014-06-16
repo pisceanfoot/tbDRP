@@ -36,13 +36,21 @@ namespace tbDRP
                 form = null;
             }
 
-            if(form == null)
+            if (form == null)
             {
                 form = (DockContent)Activator.CreateInstance(type, args);
                 formContainer.Add(type, form);
+                form.Show(this.mainDockPanel);
             }
-
-            form.Show(this.mainDockPanel);
+            else if (!form.Visible)
+            {
+                form.Show();
+            }
+            else
+            {
+                form.Activate();
+            }
+            
             return form;
         }
 

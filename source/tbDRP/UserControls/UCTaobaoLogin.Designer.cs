@@ -33,9 +33,9 @@
             // 
             // BtnTaobaoLogin
             // 
-            this.BtnTaobaoLogin.Location = new System.Drawing.Point(22, 22);
+            this.BtnTaobaoLogin.Location = new System.Drawing.Point(14, 21);
             this.BtnTaobaoLogin.Name = "BtnTaobaoLogin";
-            this.BtnTaobaoLogin.Size = new System.Drawing.Size(104, 23);
+            this.BtnTaobaoLogin.Size = new System.Drawing.Size(140, 49);
             this.BtnTaobaoLogin.TabIndex = 0;
             this.BtnTaobaoLogin.Text = "淘宝登录";
             this.BtnTaobaoLogin.UseVisualStyleBackColor = true;
@@ -43,11 +43,11 @@
             // 
             // UCTaobaoLogin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.BtnTaobaoLogin);
             this.Name = "UCTaobaoLogin";
-            this.Size = new System.Drawing.Size(150, 314);
+            this.Size = new System.Drawing.Size(198, 311);
             this.ResumeLayout(false);
 
         }

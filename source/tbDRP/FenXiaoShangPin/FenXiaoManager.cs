@@ -9,6 +9,7 @@ namespace tbDRP.FenXiaoShangPin
 {
     public class FenXiaoManager
     {
+        #region 分销商品
         public static List<FenXiaoModel> GetProductOffline()
         {
             string url = "http://goods.gongxiao.tmall.com/distributor/item/my_item_list.htm?onSale=0";
@@ -74,5 +75,85 @@ namespace tbDRP.FenXiaoShangPin
 
             return list;
         }
+        #endregion
+
+        #region 分销供应商
+        public static List<VenderModel> GetVender(string content)
+        {
+            List<VenderModel> list = new List<VenderModel>();
+
+            string table = NetDataManager.GetContent(content, "J_Relationship", ">", "</table>");
+
+            const string tr = "<tr>";
+
+            int index = table.IndexOf(tr);
+            while (index != -1)
+            {
+                string tmp;
+
+                int endIndex = table.IndexOf(tr, index + tr.Length);
+                if (endIndex == -1)
+                {
+                    tmp = table.Substring(index);
+                }
+                else
+                {
+                    tmp = table.Substring(index, endIndex - index);
+                }
+
+                VenderModel model = SplitVenderInfo(tmp);
+                if (model != null)
+                {
+                    list.Add(model);
+                }
+
+                index = table.IndexOf(tr, index + tr.Length);
+            }
+
+            return list;
+        }
+
+        private static VenderModel SplitVenderInfo(string content)
+        {
+            VenderModel model = new VenderModel();
+
+            GroupCollection venderCol = RegexUtils.Match(content, "<td class=\"cell-supplier\">[\\s\\n]*<a href=\"/browse/shop_home.htm\\?supplierId=(?<id>\\d+?)\"[^>]*>(?<name>.*?)</a>");
+            model.ID = venderCol["id"].Value;
+            model.Name = venderCol["name"].Value;
+
+            string shortNameHtml = NetDataManager.GetContent(content, "", "<td class=\"cell-supplier\">", "</td>");
+            shortNameHtml = Regex.Replace(shortNameHtml, "<[^<>]+>", "-_-");
+            string[] shortArray = shortNameHtml.Split(new string[] { "-_-" }, StringSplitOptions.RemoveEmptyEntries);
+
+            for (int i = shortArray.Length - 1; i >= 0; i--)
+            {
+                string tmp = shortArray[i].Trim();
+                if (!string.IsNullOrEmpty(tmp))
+                {
+                    model.ShortName = tmp;
+                    break;
+                }
+            }
+
+            model.ProductUrl = RegexUtils.Match(content, "<td class=\"cell-mode\">[\\s\\n]*代销\\(<a href=\"(?<url>.*?)\">产品目录</a>\\)")["url"].Value;
+
+            #region 开始结束时间
+            string date = RegexUtils.Match(content, "<td class=\"cell-start\">[\\s\\n]*(?<date>.*至.*)[\\s\\n]*</td>")["date"].Value;
+            string[] dateArray = date.Split(new char[] { '至' }, StringSplitOptions.RemoveEmptyEntries);
+            if (dateArray.Length > 0)
+            {
+                model.FromDate = dateArray[0];
+            }
+            if (dateArray.Length > 1)
+            {
+                model.EndDate = dateArray[1];
+            }
+            #endregion
+
+            model.Status = RegexUtils.Match(content, "<td class=\"cell-status\">[\\s\\n]*<p><em>(?<status>.*?)</em></p>")["status"].Value;
+
+            return model;
+        }
+        #endregion
     }
 }

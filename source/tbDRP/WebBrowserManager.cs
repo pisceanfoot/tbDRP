@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -51,6 +52,23 @@ namespace tbDRP
                 }
             }
         }
+
+        #region Html
+        public string DocumentHtml()
+        {
+            return DocumentHtml(Context.HttpEncoding);
+        }
+
+        public string DocumentHtml(Encoding encoding)
+        {
+            Stream stream = webBrowser.DocumentStream;
+            stream.Position = 0;
+            byte[] buffer = new byte[stream.Length];
+            stream.Read(buffer, 0, buffer.Length);
+
+            return encoding.GetString(buffer);
+        }
+        #endregion
 
         #region Find Element
         #region Find ID

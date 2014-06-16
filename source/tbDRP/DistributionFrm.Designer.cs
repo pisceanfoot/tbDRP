@@ -156,6 +156,7 @@
             this.ClientSize = new System.Drawing.Size(962, 610);
             this.Controls.Add(this.splitContainer1);
             this.Name = "DistributionFrm";
+            this.TabText = "下架商品列表";
             this.Text = "下架商品列表";
             this.Load += new System.EventHandler(this.DistributionFrm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);

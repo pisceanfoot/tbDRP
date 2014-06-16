@@ -15,5 +15,15 @@ namespace tbDRP.UserControls
         {
             InitializeComponent();
         }
+
+        private void BtnPublishFenxiao_Click(object sender, EventArgs e)
+        {
+            DockContext.Current.Show(typeof(FenXiaoFabuFrm));
+        }
+
+        private void BtnSetOnline_Click(object sender, EventArgs e)
+        {
+            DockContext.Current.Show(typeof(DistributionFrm));
+        }
     }
 }

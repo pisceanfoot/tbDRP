@@ -15,7 +15,7 @@ namespace tbDRP
     {
         #region Form
         private LeftMenuFrm leftMenuFrm = new LeftMenuFrm();
-        private WelcomeFrm welcomeFrm = new WelcomeFrm();
+        //private WelcomeFrm welcomeFrm = new WelcomeFrm();
         #endregion
 
         public MainFrm()

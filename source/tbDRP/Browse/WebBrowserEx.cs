@@ -58,6 +58,8 @@ namespace tbDRP.Browse
 
         public string NextUrl { get; set; }
 
+        public string Task { get; set; }
+
         public bool Busy { get; set; }
 
         protected override void OnNavigating(WebBrowserNavigatingEventArgs e)

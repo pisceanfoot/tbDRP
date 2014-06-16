@@ -20,7 +20,7 @@ namespace tbDRP
         private List<FenXiaoModel> allProductList;
         private Timer timer;
 
-        public DistributionFrm(WebBrowserEx webBrowser)
+        public DistributionFrm()
         {
             InitializeComponent();
 

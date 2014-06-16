@@ -36,6 +36,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(287, 266);
             this.Name = "EditProductFrm";
+            this.TabText = "自动编辑商品(请勿操作)";
             this.Text = "商品编辑";
             this.ResumeLayout(false);
 

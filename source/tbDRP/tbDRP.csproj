@@ -82,8 +82,15 @@
     <Compile Include="EditProductFrm.Designer.cs">
       <DependentUpon>EditProductFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="FenXiaoFabuFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FenXiaoFabuFrm.Designer.cs">
+      <DependentUpon>FenXiaoFabuFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="FenXiaoShangPin\FenXiaoManager.cs" />
     <Compile Include="FenXiaoShangPin\FenXiaoModel.cs" />
+    <Compile Include="FenXiaoShangPin\VenderModel.cs" />
     <Compile Include="HomeFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -153,6 +160,9 @@
     <EmbeddedResource Include="EditProductFrm.resx">
       <DependentUpon>EditProductFrm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FenXiaoFabuFrm.resx">
+      <DependentUpon>FenXiaoFabuFrm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HomeFrm.resx">
       <DependentUpon>HomeFrm.cs</DependentUpon>
     </EmbeddedResource>
@@ -164,6 +174,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainFrm.resx">
       <DependentUpon>MainFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UCFenXiao.resx">
+      <DependentUpon>UCFenXiao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UCTaobaoLogin.resx">
       <DependentUpon>UCTaobaoLogin.cs</DependentUpon>

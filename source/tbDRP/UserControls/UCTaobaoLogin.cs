@@ -27,5 +27,10 @@ namespace tbDRP.UserControls
 
             DockContext.Current.Show(taobaoLoginFrm);
         }
+
+        protected override void OnBackgroundImageChanged(EventArgs e)
+        {
+            //base.OnBackgroundImageChanged(e);
+        }
     }
 }
