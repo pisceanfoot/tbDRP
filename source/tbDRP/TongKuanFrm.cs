@@ -6,10 +6,11 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using tbDRP.Dock;
 
 namespace tbDRP
 {
-    public partial class TongKuanFrm : Form
+    public partial class TongKuanFrm : DockDocumentFrm
     {
         public TongKuanFrm()
         {

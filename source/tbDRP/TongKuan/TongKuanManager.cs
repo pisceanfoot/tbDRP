@@ -20,10 +20,74 @@ namespace tbDRP.TongKuan
             string body = NetDataManager.GetContent(content, "class=\"tb-content\"", "class=\"row grid-view newsrp-gridcontent-el\"", "<div class=\"tb-bottom\">");
             string matchString = "\\<div class=\"similar-btns\"\\>\\n*\\s*\\<span class=\"devide-line\"\\>\\<\\/span\\>\\n*\\s*\\<a target=\"_blank\" href=\"(?<url>.*?)\"";
             Match match = Regex.Match(body, matchString);
-            if(match.Success)
+            if (match.Success)
             {
                 string tongkuanUrl = match.Groups["url"].Value;
 
+                newTitle = GetTongKuan(url, tongkuanUrl);
+            }
+
+            return newTitle;
+        }
+
+        public static string GetNewTitle1(string title)
+        {
+            string newTitle = string.Empty;
+
+            string url = string.Format("http://s.taobao.com/search?q={0}", HttpUtility.UrlEncode(title, Context.HttpEncoding));
+            string content = NetDataManager.GetString(url);
+
+            string body = NetDataManager.GetContent(content, "class=\"tb-content\"", "class=\"row grid-view newsrp-gridcontent-el\"", "<div class=\"tb-bottom\">");
+
+            string tmallTongKuanUrl = null;
+            string tongkuanUrl = null;
+
+            const string find = "<div class=\"col item st-item";
+            int index = body.IndexOf(find);
+            while (index != -1)
+            {
+                int endIndex = body.IndexOf(find, index + find.Length);
+
+                string tmp;
+                if (endIndex == -1)
+                {
+                    tmp = body.Substring(index);
+                }
+                else
+                {
+                    tmp = body.Substring(index, endIndex - index);
+                }
+
+                string matchString = "\\<div class=\"similar-btns\"\\>\\n*\\s*\\<span class=\"devide-line\"\\>\\<\\/span\\>\\n*\\s*\\<a target=\"_blank\" href=\"(?<url>.*?)\"";
+                Match match = Regex.Match(body, matchString);
+                if (match.Success)
+                {
+                    string tmpTongkuanUrl = match.Groups["url"].Value;
+
+                    if (tmp.Contains("icon-service-tianmao"))
+                    {
+                        if (tmallTongKuanUrl == null)
+                        {
+                            tmallTongKuanUrl = tmpTongkuanUrl;
+                        }
+                    }
+                    else
+                    {
+                        // success
+                        tongkuanUrl = tmpTongkuanUrl;
+                        break;
+                    }
+                }
+
+                index = endIndex;
+            }
+
+            if (string.IsNullOrEmpty(tongkuanUrl))
+            {
+                tongkuanUrl = tmallTongKuanUrl;
+            }
+            if (!string.IsNullOrEmpty(tongkuanUrl))
+            {
                 newTitle = GetTongKuan(url, tongkuanUrl);
             }
 

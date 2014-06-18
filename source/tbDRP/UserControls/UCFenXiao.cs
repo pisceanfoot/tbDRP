@@ -25,5 +25,10 @@ namespace tbDRP.UserControls
         {
             DockContext.Current.Show(typeof(DistributionFrm));
         }
+
+        private void BtnTongKuanTitle_Click(object sender, EventArgs e)
+        {
+            DockContext.Current.Show(typeof(TongKuanFrm));
+        }
     }
 }

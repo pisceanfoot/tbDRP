@@ -155,5 +155,60 @@ namespace tbDRP.FenXiaoShangPin
             return model;
         }
         #endregion
+
+        #region 供应商商品
+        public static List<FenXiaoModel> GetProductFromVender(string html)
+        {
+            List<FenXiaoModel> list = new List<FenXiaoModel>();
+
+            string content = NetDataManager.GetContent(html, "J_MyItemList", ">", "</table>");
+            const string find = "<tr class=\"item\">";
+            int index = content.IndexOf(find);
+            while (index != -1)
+            {
+                int endIndex = content.IndexOf(find, index + find.Length);
+
+                string tmp;
+                if (endIndex == -1)
+                {
+                    tmp = content.Substring(index);
+                }
+                else
+                {
+                    tmp = content.Substring(index, endIndex - index);
+                }
+                FenXiaoModel model = CreateProductFromVender(tmp);
+                if (model != null)
+                {
+                    list.Add(model);
+                }
+
+                index = content.IndexOf(find, index + find.Length);
+            }
+
+            return list;
+        }
+
+        private static FenXiaoModel CreateProductFromVender(string content)
+        {
+            FenXiaoModel model = new FenXiaoModel();
+
+            GroupCollection titleCol = RegexUtils.Match(content, "<p class=\"title\">[\\s\\n]*<a href=\"/product/product_detail.htm\\?productId=(?<id>\\d+)[^>]*>(?<title>.*?)</a>");
+            model.ID = titleCol["id"].Value;
+            model.Title = titleCol["title"].Value;
+
+            GroupCollection priceCol = RegexUtils.Match(content, "<span class=\"label-like\">利润区间：</span>[\\s\\n]*<em>(?<from>.*)</em>[\\s\\n]*~[\\s\\n]*<em>(?<to>.*?)</em>");
+            model.PriceFrom = priceCol["from"].Value;
+            model.PriceTo = priceCol["to"].Value;
+
+            model.Inventory = NetDataManager.GetContent(content, "库存:", "\">", "</span>");
+            if (!string.IsNullOrEmpty(model.Inventory))
+            {
+                model.Inventory = model.Inventory.Trim();
+            }
+
+            return model;
+        }
+        #endregion
     }
 }

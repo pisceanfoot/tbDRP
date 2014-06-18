@@ -6,11 +6,14 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using tbDRP.Browse;
+using tbDRP.Http;
 
 namespace tbDRP
 {
     public class WebBrowserManager
     {
+        private string mailUrl = null;
+
         public event Action<WebBrowserEx> DocumentComplete;
 
         private WebBrowserEx webBrowser;
@@ -18,11 +21,13 @@ namespace tbDRP
         public WebBrowserManager()
         {
             this.webBrowser = new WebBrowserEx();
+            this.webBrowser.DocumentCompleted += webBrowser_DocumentCompleted;
         }
 
         public WebBrowserManager(WebBrowserEx webBrowser)
         {
             this.webBrowser = webBrowser;
+            this.webBrowser.DocumentCompleted += webBrowser_DocumentCompleted;
         }
 
         public WebBrowserEx Browser
@@ -32,9 +37,14 @@ namespace tbDRP
 
         public void Navigate(string url)
         {
-            
+            if (!string.IsNullOrEmpty(this.mailUrl))
+            {
+                url = NetDataManager.GetUrl(this.mailUrl, url);
+            }
+
             this.webBrowser.Navigate(url);
-            this.webBrowser.DocumentCompleted += webBrowser_DocumentCompleted;
+            
+            this.mailUrl = url;
         }
 
         private void webBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
@@ -45,7 +55,6 @@ namespace tbDRP
                 if (e.Url.AbsolutePath != webBrowser.Url.AbsolutePath)
                     return;
 
-                webBrowser.DocumentCompleted -= webBrowser_DocumentCompleted;
                 if (DocumentComplete != null)
                 {
                     DocumentComplete(webBrowser);
@@ -129,6 +138,62 @@ namespace tbDRP
 
         #endregion Find ClassName
         #endregion
+
+        #region Get Position
+
+        private int GetMaxPosition()
+        {
+            return this.Browser.Document.Window.Size.Height;
+        }
+
+        private int GetY()
+        {
+            return Browser.Document.GetElementsByTagName("HTML")[0].ScrollTop;
+        }
+
+        private int GetY(HtmlElement element)
+        {
+            return element.ScrollTop;
+        }
+
+        public void ToY(int y)
+        {
+            Browser.Document.Window.ScrollTo(0, y);
+        }
+
+        public int GetXoffset(HtmlElement element)
+        {
+            //get element pos
+            int xPos = element.OffsetRectangle.Left;
+
+            //get the parents pos
+            HtmlElement tempEl = element.OffsetParent;
+            while (tempEl != null)
+            {
+                xPos += tempEl.OffsetRectangle.Left;
+                tempEl = tempEl.OffsetParent;
+            }
+
+            return xPos;
+        }
+
+        public int GetYoffset(HtmlElement element)
+        {
+            //get element pos
+            int yPos = element.OffsetRectangle.Top;
+
+            //get the parents pos
+            HtmlElement tempEl = element.OffsetParent;
+            while (tempEl != null)
+            {
+                yPos += tempEl.OffsetRectangle.Top;
+                tempEl = tempEl.OffsetParent;
+            }
+
+            return yPos;
+        }
+
+        #endregion Get Position
 
         #region Action
         public void ClickHelemnt(HtmlElement h)

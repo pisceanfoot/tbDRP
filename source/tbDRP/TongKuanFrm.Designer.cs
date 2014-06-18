@@ -78,7 +78,8 @@
             this.Controls.Add(this.TxtTitle);
             this.Controls.Add(this.label1);
             this.Name = "TongKuanFrm";
-            this.Text = "TongKuanFrm";
+            this.TabText = "同款标题查找";
+            this.Text = "同款标题查找";
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -32,6 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxVender = new System.Windows.Forms.ComboBox();
             this.BtnPublish = new System.Windows.Forms.Button();
+            this.BtnStopFabu = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -48,6 +49,7 @@
             // 
             this.splitContainer1.Panel1.Controls.Add(this.label1);
             this.splitContainer1.Panel1.Controls.Add(this.comboBoxVender);
+            this.splitContainer1.Panel1.Controls.Add(this.BtnStopFabu);
             this.splitContainer1.Panel1.Controls.Add(this.BtnPublish);
             this.splitContainer1.Size = new System.Drawing.Size(638, 457);
             this.splitContainer1.SplitterDistance = 101;
@@ -81,6 +83,16 @@
             this.BtnPublish.UseVisualStyleBackColor = true;
             this.BtnPublish.Click += new System.EventHandler(this.BtnPublish_Click);
             // 
+            // BtnStopFabu
+            // 
+            this.BtnStopFabu.Location = new System.Drawing.Point(422, 27);
+            this.BtnStopFabu.Name = "BtnStopFabu";
+            this.BtnStopFabu.Size = new System.Drawing.Size(75, 50);
+            this.BtnStopFabu.TabIndex = 1;
+            this.BtnStopFabu.Text = "停止发布";
+            this.BtnStopFabu.UseVisualStyleBackColor = true;
+            this.BtnStopFabu.Click += new System.EventHandler(this.BtnStopFabu_Click);
+            // 
             // FenXiaoFabuFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -105,5 +117,6 @@
         private System.Windows.Forms.Button BtnPublish;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBoxVender;
+        private System.Windows.Forms.Button BtnStopFabu;
     }
 }

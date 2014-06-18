@@ -30,5 +30,9 @@ namespace tbDRP.FenXiaoShangPin
         public string Inventory { get; set; }
 
         public string TitleStatus { get; set; }
+
+        public string PriceFrom { get; set; }
+
+        public string PriceTo { get; set; }
     }
 }
