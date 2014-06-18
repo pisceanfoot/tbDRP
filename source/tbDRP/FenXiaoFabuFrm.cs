@@ -229,7 +229,8 @@ namespace tbDRP
                 decimal priceFrom;
                 if (decimal.TryParse(model.PriceFrom, out priceFrom))
                 {
-                    if (priceFrom <= 0)
+                    // 价格过滤
+                    if (priceFrom <= 5)
                     {
                         addFenXiaoProductTimer.Start();
                         return;
