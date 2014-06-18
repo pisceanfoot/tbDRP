@@ -221,11 +221,11 @@ namespace tbDRP
                 fenxiaoProductListIndex++;
                 FenXiaoModel model = fenxiaoProductList[findProductIndex];
 
-                if (model.Inventory != "有货")
-                {
-                    addFenXiaoProductTimer.Start();
-                    return;
-                }
+                //if (model.Inventory != "有货")
+                //{
+                //    addFenXiaoProductTimer.Start();
+                //    return;
+                //}
                 decimal priceFrom;
                 if (decimal.TryParse(model.PriceFrom, out priceFrom))
                 {
