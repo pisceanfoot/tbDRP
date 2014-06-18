@@ -83,11 +83,16 @@ namespace tbDRP
 
         private void editProductBrowser_DocumentComplete(Browse.WebBrowserEx browser)
         {
-            this.clickTimer.Start();
+            if (browser.Task == "EditProduct")
+            {
+                this.clickTimer.Start();
+                browser.Task = "";
+            }
         }
 
         public void Run(FenXiaoModel model)
         {
+            editProductBrowser.Browser.Task = "EditProduct";
             editProductBrowser.Browser.Tag = model;
             editProductBrowser.Navigate(model.Url);
         }
