@@ -40,6 +40,7 @@
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.checkBoxSelectAll = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -55,6 +56,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.checkBoxSelectAll);
             this.splitContainer1.Panel1.Controls.Add(this.BtnOnSell);
             this.splitContainer1.Panel1.Controls.Add(this.BtnChangeTitle);
             this.splitContainer1.Panel1.Controls.Add(this.BtnRefresh);
@@ -97,6 +99,7 @@
             // 
             // listView
             // 
+            this.listView.CheckBoxes = true;
             this.listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
@@ -106,6 +109,8 @@
             this.columnHeader6,
             this.columnHeader7});
             this.listView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView.FullRowSelect = true;
+            this.listView.GridLines = true;
             this.listView.Location = new System.Drawing.Point(0, 0);
             this.listView.MultiSelect = false;
             this.listView.Name = "listView";
@@ -149,6 +154,17 @@
             this.columnHeader7.Text = "标题状态";
             this.columnHeader7.Width = 86;
             // 
+            // checkBoxSelectAll
+            // 
+            this.checkBoxSelectAll.AutoSize = true;
+            this.checkBoxSelectAll.Location = new System.Drawing.Point(22, 83);
+            this.checkBoxSelectAll.Name = "checkBoxSelectAll";
+            this.checkBoxSelectAll.Size = new System.Drawing.Size(78, 16);
+            this.checkBoxSelectAll.TabIndex = 1;
+            this.checkBoxSelectAll.Text = "全选/反选";
+            this.checkBoxSelectAll.UseVisualStyleBackColor = true;
+            this.checkBoxSelectAll.CheckedChanged += new System.EventHandler(this.checkBoxSelectAll_CheckedChanged);
+            // 
             // DistributionFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -160,6 +176,7 @@
             this.Text = "下架商品列表";
             this.Load += new System.EventHandler(this.DistributionFrm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
@@ -181,5 +198,6 @@
         private System.Windows.Forms.Button BtnRefresh;
         private System.Windows.Forms.Button BtnChangeTitle;
         private System.Windows.Forms.Button BtnOnSell;
+        private System.Windows.Forms.CheckBox checkBoxSelectAll;
     }
 }

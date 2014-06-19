@@ -123,6 +123,7 @@ namespace tbDRP
                 foreach (FenXiaoModel model in list)
                 {
                     ListViewItem item = new ListViewItem(model.Title);
+                    item.Checked = true;
 
                     item.SubItems.Add(model.Price);
                     item.SubItems.Add(model.Cost);
@@ -182,6 +183,13 @@ namespace tbDRP
             for (; onSellClickIndex < list.Count; )
             {
                 FenXiaoModel model = list[onSellClickIndex];
+                ListViewItem item = listView.Items[onSellClickIndex];
+                if (!item.Checked)
+                {
+                    onSellClickIndex++;
+                    continue;
+                }
+
                 if (!string.IsNullOrEmpty(model.TitleStatus))
                 {
                     string title = TongKuan.TongKuanManager.GetNewTitle(model.Title);
@@ -212,6 +220,18 @@ namespace tbDRP
                 }
                 editProductFrm.Run(model);
                 break;
+            }
+        }
+
+        private void checkBoxSelectAll_CheckedChanged(object sender, EventArgs e)
+        {
+            bool check =  checkBoxSelectAll.Checked;
+            if (listView.Items.Count > 0)
+            {
+                foreach (ListViewItem item in listView.Items)
+                {
+                    item.Checked = !check;
+                }
             }
         }
     }
