@@ -232,33 +232,10 @@ namespace tbDRP
                 fenxiaoProductListIndex++;
                 FenXiaoModel model = fenxiaoProductList[findProductIndex];
 
-                //if (model.Inventory != "有货")
-                //{
-                //    addFenXiaoProductTimer.Start();
-                //    return;
-                //}
-                if (!string.IsNullOrEmpty(model.F))
+                if (Filter(model))
                 {
-                    addFenXiaoProductTimer.Start();
                     return;
                 }
-                decimal priceFrom;
-                if (decimal.TryParse(model.PriceFrom, out priceFrom))
-                {
-                    decimal filterPrice = numericPriceFrom.Value;
-                    if (filterPrice < 0)
-                    {
-                        filterPrice = 0;
-                    }
-
-                    // 价格过滤
-                    if (priceFrom <= filterPrice)
-                    {
-                        addFenXiaoProductTimer.Start();
-                        return;
-                    }
-                }
-
 
                 HtmlElement table = manager.FindID("J_MyItemList");
                 HtmlElementCollection trCol = table.GetElementsByTagName("tr");
@@ -295,6 +272,66 @@ namespace tbDRP
                     }
                 }
             }
+        }
+
+        private bool Filter(FenXiaoModel model)
+        {
+            if (checkBoxInventory.Checked && model.Inventory != "有货")
+            {
+                addFenXiaoProductTimer.Start();
+                return true;
+            }
+            if (!string.IsNullOrEmpty(model.F))
+            {
+                addFenXiaoProductTimer.Start();
+                return true;
+            }
+            decimal priceFrom;
+            if (decimal.TryParse(model.PriceFrom, out priceFrom))
+            {
+                decimal filterPrice = numericPriceFrom.Value;
+                if (filterPrice < 0)
+                {
+                    filterPrice = 0;
+                }
+
+                // 价格过滤
+                if (priceFrom <= filterPrice)
+                {
+                    addFenXiaoProductTimer.Start();
+                    return true;
+                }
+            }
+
+            if (numericSellCount.Value > 0)
+            {
+                // 成交笔数
+                int count;
+                if (int.TryParse(model.SellCount, out count))
+                {
+                    if (count < numericSellCount.Value)
+                    {
+                        addFenXiaoProductTimer.Start();
+                        return true;
+                    }
+                }
+            }
+
+            DateTime sellDate = dateTimeUpdateDate.Value;
+            if (sellDate > DateTime.Parse("2000-01-01"))
+            {
+                DateTime onSellDate;
+                if (DateTime.TryParse(model.UpdateDate, out onSellDate))
+                {
+                    if (onSellDate < sellDate)
+                    {
+                        addFenXiaoProductTimer.Start();
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
         #endregion
 

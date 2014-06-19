@@ -35,6 +35,10 @@ namespace tbDRP.FenXiaoShangPin
 
         public string PriceTo { get; set; }
 
+        public string SellCount { get; set; }
+
+        public string UpdateDate { get; set; }
+
         public string F { get; set; }
     }
 }

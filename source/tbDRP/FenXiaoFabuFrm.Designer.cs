@@ -39,12 +39,18 @@
             this.comboBoxVender = new System.Windows.Forms.ComboBox();
             this.BtnStopFabu = new System.Windows.Forms.Button();
             this.BtnPublish = new System.Windows.Forms.Button();
+            this.numericSellCount = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.dateTimeUpdateDate = new System.Windows.Forms.DateTimePicker();
+            this.checkBoxInventory = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericPerPage)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericPriceFrom)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSellCount)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -96,7 +102,12 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.checkBoxInventory);
+            this.groupBox1.Controls.Add(this.dateTimeUpdateDate);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.numericSellCount);
             this.groupBox1.Controls.Add(this.numericPriceFrom);
             this.groupBox1.Location = new System.Drawing.Point(474, 5);
             this.groupBox1.Name = "groupBox1";
@@ -108,7 +119,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 23);
+            this.label3.Location = new System.Drawing.Point(32, 22);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 12);
             this.label3.TabIndex = 7;
@@ -116,7 +127,7 @@
             // 
             // numericPriceFrom
             // 
-            this.numericPriceFrom.Location = new System.Drawing.Point(80, 20);
+            this.numericPriceFrom.Location = new System.Drawing.Point(103, 20);
             this.numericPriceFrom.Name = "numericPriceFrom";
             this.numericPriceFrom.Size = new System.Drawing.Size(49, 21);
             this.numericPriceFrom.TabIndex = 6;
@@ -164,6 +175,51 @@
             this.BtnPublish.UseVisualStyleBackColor = true;
             this.BtnPublish.Click += new System.EventHandler(this.BtnPublish_Click);
             // 
+            // numericSellCount
+            // 
+            this.numericSellCount.Location = new System.Drawing.Point(103, 53);
+            this.numericSellCount.Name = "numericSellCount";
+            this.numericSellCount.Size = new System.Drawing.Size(49, 21);
+            this.numericSellCount.TabIndex = 6;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(8, 53);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(89, 12);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "成交笔数大于：";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(163, 24);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(89, 12);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "铺货时间大于：";
+            // 
+            // dateTimeUpdateDate
+            // 
+            this.dateTimeUpdateDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimeUpdateDate.Location = new System.Drawing.Point(258, 19);
+            this.dateTimeUpdateDate.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.dateTimeUpdateDate.Name = "dateTimeUpdateDate";
+            this.dateTimeUpdateDate.Size = new System.Drawing.Size(96, 21);
+            this.dateTimeUpdateDate.TabIndex = 8;
+            this.dateTimeUpdateDate.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            // 
+            // checkBoxInventory
+            // 
+            this.checkBoxInventory.AutoSize = true;
+            this.checkBoxInventory.Location = new System.Drawing.Point(165, 55);
+            this.checkBoxInventory.Name = "checkBoxInventory";
+            this.checkBoxInventory.Size = new System.Drawing.Size(72, 16);
+            this.checkBoxInventory.TabIndex = 9;
+            this.checkBoxInventory.Text = "库存有货";
+            this.checkBoxInventory.UseVisualStyleBackColor = true;
+            // 
             // FenXiaoFabuFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -182,6 +238,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericPriceFrom)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSellCount)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -199,5 +256,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown numericPriceFrom;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown numericSellCount;
+        private System.Windows.Forms.DateTimePicker dateTimeUpdateDate;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.CheckBox checkBoxInventory;
     }
 }

@@ -207,6 +207,9 @@ namespace tbDRP.FenXiaoShangPin
                 model.Inventory = model.Inventory.Trim();
             }
 
+            model.SellCount = NetDataManager.GetContent(content, "", "<span>成交", "笔</span>");
+            model.UpdateDate = NetDataManager.GetContent(content, "<span>成交", "铺货：", "</p>");
+
             return model;
         }
         #endregion
