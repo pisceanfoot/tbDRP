@@ -47,8 +47,6 @@ namespace tbDRP
             checkDownTimer.Enabled = false;
         }
 
-        
-
         private void InitList()
         {
             list.Clear();
@@ -59,29 +57,36 @@ namespace tbDRP
         private bool publishAllVender = false;
         private void BtnPublish_Click(object sender, EventArgs e)
         {
-            stopPublishNewProduct = true;
-            venderIndex = this.comboBoxVender.SelectedIndex;
-            if (venderIndex == 0)
+            startPublishNewProduct = true;
+
+            if (checkBoxCurrentOnly.Checked)
             {
-                publishAllVender = true;
-                venderIndex = 1;
+                publishAllVender = false;
+                PublishCurrentPage();
             }
             else
             {
-                publishAllVender = false;
-            }
+                venderIndex = this.comboBoxVender.SelectedIndex;
+                if (venderIndex == 0)
+                {
+                    publishAllVender = true;
+                    venderIndex = 1;
+                }
+                else
+                {
+                    publishAllVender = false;
+                }
 
-            Vender();
+                Vender();
+            }
         }
 
-        private int venderProductPageIndex = 0;
         private void Vender()
         {
             if (venderIndex < this.list.Count)
             {
                 VenderModel model = this.list[venderIndex++];
 
-                this.venderProductPageIndex = 0;
                 this.manager.Browser.Task = "Publish";
                 this.manager.Navigate(model.ProductUrl);
             }
@@ -100,19 +105,16 @@ namespace tbDRP
             {
                 // 切换商家
                 LoadVenderList(browser);
+                
             }
             else if (browser.Task == "Publish")
             {
                 // 产品列表
                 Publish(browser);
             }
-            else if (browser.Task == "PublishProduct")
-            {
-                // 点击发布新品
-                PublishProduct(browser);
-            }
         }
 
+        #region Vender
         private void LoadVenderList(WebBrowserEx browser)
         {
             string html = manager.DocumentHtml();
@@ -153,13 +155,12 @@ namespace tbDRP
             this.comboBoxVender.DataSource = list;
             this.comboBoxVender.DisplayMember = "ShortName";
             this.comboBoxVender.ValueMember = "ID";
+
+            this.manager.Browser.Task = "Vender_Done";
         }
+        #endregion
 
-        private void PublishProduct(WebBrowserEx browser)
-        {
-
-        }
-
+        #region Product
         private void checkDownTimer_Tick(object sender, EventArgs e)
         {
             checkDownTimer.Enabled = false;
@@ -179,6 +180,7 @@ namespace tbDRP
             checkDownTimer.Enabled = true;
         }
         private int fenxiaoProductListIndex = 0;
+        
         private List<FenXiaoModel> fenxiaoProductList;
         private void Publish(WebBrowserEx browser)
         {
@@ -210,9 +212,18 @@ namespace tbDRP
         {
             addFenXiaoProductTimer.Enabled = false;
 
-            if (!stopPublishNewProduct)
+            if (!startPublishNewProduct)
             {
                 return;
+            }
+
+            int maxFenXiaoCount = (int)numericPerPage.Value;
+            if (maxFenXiaoCount > 0)
+            {
+                if (fenxiaoProductListIndex >= maxFenXiaoCount)
+                {
+                    return;
+                }
             }
 
             if (fenxiaoProductListIndex < fenxiaoProductList.Count)
@@ -226,11 +237,22 @@ namespace tbDRP
                 //    addFenXiaoProductTimer.Start();
                 //    return;
                 //}
+                if (!string.IsNullOrEmpty(model.F))
+                {
+                    addFenXiaoProductTimer.Start();
+                    return;
+                }
                 decimal priceFrom;
                 if (decimal.TryParse(model.PriceFrom, out priceFrom))
                 {
+                    decimal filterPrice = numericPriceFrom.Value;
+                    if (filterPrice < 0)
+                    {
+                        filterPrice = 0;
+                    }
+
                     // 价格过滤
-                    if (priceFrom <= 5)
+                    if (priceFrom <= filterPrice)
                     {
                         addFenXiaoProductTimer.Start();
                         return;
@@ -274,11 +296,21 @@ namespace tbDRP
                 }
             }
         }
+        #endregion
 
-        private bool stopPublishNewProduct = false;
+        #region Stop
+        private bool startPublishNewProduct = false;
         private void BtnStopFabu_Click(object sender, EventArgs e)
         {
-            stopPublishNewProduct = false;
+            startPublishNewProduct = false;
         }
+        #endregion
+
+        #region 仅处理当前页面
+        private void PublishCurrentPage()
+        {
+            Publish(this.manager.Browser);
+        }
+        #endregion
     }
 }
