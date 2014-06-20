@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.checkBoxSelectAll = new System.Windows.Forms.CheckBox();
             this.BtnOnSell = new System.Windows.Forms.Button();
             this.BtnChangeTitle = new System.Windows.Forms.Button();
             this.BtnRefresh = new System.Windows.Forms.Button();
@@ -40,7 +41,6 @@
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.checkBoxSelectAll = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -67,6 +67,17 @@
             this.splitContainer1.Size = new System.Drawing.Size(962, 610);
             this.splitContainer1.SplitterDistance = 107;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // checkBoxSelectAll
+            // 
+            this.checkBoxSelectAll.AutoSize = true;
+            this.checkBoxSelectAll.Location = new System.Drawing.Point(22, 83);
+            this.checkBoxSelectAll.Name = "checkBoxSelectAll";
+            this.checkBoxSelectAll.Size = new System.Drawing.Size(78, 16);
+            this.checkBoxSelectAll.TabIndex = 1;
+            this.checkBoxSelectAll.Text = "全选/反选";
+            this.checkBoxSelectAll.UseVisualStyleBackColor = true;
+            this.checkBoxSelectAll.CheckedChanged += new System.EventHandler(this.checkBoxSelectAll_CheckedChanged);
             // 
             // BtnOnSell
             // 
@@ -153,17 +164,6 @@
             // 
             this.columnHeader7.Text = "标题状态";
             this.columnHeader7.Width = 86;
-            // 
-            // checkBoxSelectAll
-            // 
-            this.checkBoxSelectAll.AutoSize = true;
-            this.checkBoxSelectAll.Location = new System.Drawing.Point(22, 83);
-            this.checkBoxSelectAll.Name = "checkBoxSelectAll";
-            this.checkBoxSelectAll.Size = new System.Drawing.Size(78, 16);
-            this.checkBoxSelectAll.TabIndex = 1;
-            this.checkBoxSelectAll.Text = "全选/反选";
-            this.checkBoxSelectAll.UseVisualStyleBackColor = true;
-            this.checkBoxSelectAll.CheckedChanged += new System.EventHandler(this.checkBoxSelectAll_CheckedChanged);
             // 
             // DistributionFrm
             // 

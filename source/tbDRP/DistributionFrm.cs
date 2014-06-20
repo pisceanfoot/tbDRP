@@ -120,6 +120,8 @@ namespace tbDRP
             }
             else
             {
+                this.checkBoxSelectAll.Checked = list.Count > 0;
+
                 foreach (FenXiaoModel model in list)
                 {
                     ListViewItem item = new ListViewItem(model.Title);

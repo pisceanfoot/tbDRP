@@ -180,11 +180,14 @@ namespace tbDRP
             checkDownTimer.Enabled = true;
         }
         private int fenxiaoProductListIndex = 0;
+        private int addProductCount = 0;
         
         private List<FenXiaoModel> fenxiaoProductList;
         private void Publish(WebBrowserEx browser)
         {
             fenxiaoProductListIndex = 0;
+            addProductCount = 0;
+
             if (fenxiaoProductList == null)
             {
                 fenxiaoProductList = new List<FenXiaoModel>();
@@ -220,7 +223,7 @@ namespace tbDRP
             int maxFenXiaoCount = (int)numericPerPage.Value;
             if (maxFenXiaoCount > 0)
             {
-                if (fenxiaoProductListIndex >= maxFenXiaoCount)
+                if (addProductCount >= maxFenXiaoCount)
                 {
                     return;
                 }
@@ -230,6 +233,7 @@ namespace tbDRP
             {
                 int findProductIndex = fenxiaoProductListIndex;
                 fenxiaoProductListIndex++;
+                
                 FenXiaoModel model = fenxiaoProductList[findProductIndex];
 
                 if (Filter(model))
@@ -245,6 +249,8 @@ namespace tbDRP
 
                 if (a != null)
                 {
+                    addProductCount++;
+
                     int y = manager.GetYoffset(a);
                     manager.ToY(y - 100);
 
@@ -256,6 +262,12 @@ namespace tbDRP
             }
             else
             {
+                // 仅当前页
+                if (checkBoxCurrentOnly.Checked)
+                {
+                    return;
+                }
+
                 // next Page
                 manager.Browser.Task = "Publish";
                 
