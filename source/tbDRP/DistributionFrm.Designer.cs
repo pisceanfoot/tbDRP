@@ -35,6 +35,7 @@
             this.BtnRefresh = new System.Windows.Forms.Button();
             this.listView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -97,6 +98,7 @@
             this.BtnChangeTitle.TabIndex = 0;
             this.BtnChangeTitle.Text = "修改标题";
             this.BtnChangeTitle.UseVisualStyleBackColor = true;
+            this.BtnChangeTitle.Click += new System.EventHandler(this.BtnChangeTitle_Click);
             // 
             // BtnRefresh
             // 
@@ -113,6 +115,7 @@
             this.listView.CheckBoxes = true;
             this.listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
+            this.columnHeader8,
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4,
@@ -133,7 +136,12 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "名称";
-            this.columnHeader1.Width = 385;
+            this.columnHeader1.Width = 243;
+            // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "新标题";
+            this.columnHeader8.Width = 157;
             // 
             // columnHeader2
             // 
@@ -199,5 +207,6 @@
         private System.Windows.Forms.Button BtnChangeTitle;
         private System.Windows.Forms.Button BtnOnSell;
         private System.Windows.Forms.CheckBox checkBoxSelectAll;
+        private System.Windows.Forms.ColumnHeader columnHeader8;
     }
 }

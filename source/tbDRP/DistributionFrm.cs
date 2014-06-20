@@ -126,7 +126,9 @@ namespace tbDRP
                 {
                     ListViewItem item = new ListViewItem(model.Title);
                     item.Checked = true;
+                    item.Tag = model;
 
+                    item.SubItems.Add(model.NewTitle);
                     item.SubItems.Add(model.Price);
                     item.SubItems.Add(model.Cost);
                     item.SubItems.Add(model.DiffertialCost);
@@ -192,9 +194,9 @@ namespace tbDRP
                     continue;
                 }
 
-                if (!string.IsNullOrEmpty(model.TitleStatus))
+                if (!string.IsNullOrEmpty(model.TitleStatus) && string.IsNullOrEmpty(model.NewTitle))
                 {
-                    string title = TongKuan.TongKuanManager.GetNewTitle(model.Title);
+                    string title = TongKuan.TongKuanManager.GetNewTitle(model.Title, model.Partener);
                     if (string.IsNullOrEmpty(title))
                     {
                         // 商家原始名称
@@ -234,6 +236,29 @@ namespace tbDRP
                 {
                     item.Checked = !check;
                 }
+            }
+        }
+
+        private void BtnChangeTitle_Click(object sender, EventArgs e)
+        {
+            if (listView.SelectedItems == null || listView.SelectedItems.Count == 0)
+            {
+                return;
+            }
+
+            ListViewItem item = listView.SelectedItems[0];
+            FenXiaoModel model = item.Tag as FenXiaoModel;
+
+            TongKuanFrm form = new TongKuanFrm();
+            form.Title = model.Title;
+            form.Vender = model.Partener;
+
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                model.NewTitle = form.NewTitle;
+
+                // 新标题
+                item.SubItems[1].Text = model.NewTitle;
             }
         }
     }

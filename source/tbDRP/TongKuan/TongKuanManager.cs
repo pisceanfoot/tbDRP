@@ -10,7 +10,7 @@ namespace tbDRP.TongKuan
 {
     public class TongKuanManager
     {
-        public static string GetNewTitle(string title)
+        public static string GetNewTitle(string title, string vender)
         {
             string newTitle = string.Empty;
 
@@ -25,6 +25,11 @@ namespace tbDRP.TongKuan
                 string tongkuanUrl = match.Groups["url"].Value;
 
                 newTitle = GetTongKuan(url, tongkuanUrl);
+            }
+
+            if (newTitle != null)
+            {
+                newTitle = newTitle.Replace("包邮", string.Empty);
             }
 
             return newTitle;
