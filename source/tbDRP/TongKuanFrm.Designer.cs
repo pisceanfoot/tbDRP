@@ -112,17 +112,17 @@
             // 
             // BtnInBrowser
             // 
-            this.BtnInBrowser.Location = new System.Drawing.Point(412, 72);
+            this.BtnInBrowser.Location = new System.Drawing.Point(64, 305);
             this.BtnInBrowser.Name = "BtnInBrowser";
-            this.BtnInBrowser.Size = new System.Drawing.Size(75, 23);
+            this.BtnInBrowser.Size = new System.Drawing.Size(77, 23);
             this.BtnInBrowser.TabIndex = 5;
-            this.BtnInBrowser.Text = "浏览器查看";
+            this.BtnInBrowser.Text = "浏览器搜索";
             this.BtnInBrowser.UseVisualStyleBackColor = true;
             this.BtnInBrowser.Click += new System.EventHandler(this.BtnInBrowser_Click);
             // 
             // BtnBrowserProduct
             // 
-            this.BtnBrowserProduct.Location = new System.Drawing.Point(313, 304);
+            this.BtnBrowserProduct.Location = new System.Drawing.Point(164, 305);
             this.BtnBrowserProduct.Name = "BtnBrowserProduct";
             this.BtnBrowserProduct.Size = new System.Drawing.Size(69, 23);
             this.BtnBrowserProduct.TabIndex = 5;
