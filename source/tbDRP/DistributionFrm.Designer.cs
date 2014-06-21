@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.checkBoxSelectAll = new System.Windows.Forms.CheckBox();
             this.BtnOnSell = new System.Windows.Forms.Button();
@@ -42,10 +43,13 @@
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.浏览BToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -122,6 +126,7 @@
             this.columnHeader5,
             this.columnHeader6,
             this.columnHeader7});
+            this.listView.ContextMenuStrip = this.contextMenuStrip1;
             this.listView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView.FullRowSelect = true;
             this.listView.GridLines = true;
@@ -146,7 +151,7 @@
             // columnHeader2
             // 
             this.columnHeader2.Text = "价格";
-            this.columnHeader2.Width = 98;
+            this.columnHeader2.Width = 81;
             // 
             // columnHeader3
             // 
@@ -166,12 +171,26 @@
             // columnHeader6
             // 
             this.columnHeader6.Text = "库存";
-            this.columnHeader6.Width = 85;
+            this.columnHeader6.Width = 55;
             // 
             // columnHeader7
             // 
-            this.columnHeader7.Text = "标题状态";
+            this.columnHeader7.Text = "状态";
             this.columnHeader7.Width = 86;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.浏览BToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 48);
+            // 
+            // 浏览BToolStripMenuItem
+            // 
+            this.浏览BToolStripMenuItem.Name = "浏览BToolStripMenuItem";
+            this.浏览BToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.浏览BToolStripMenuItem.Text = "浏览(&B)...";
+            this.浏览BToolStripMenuItem.Click += new System.EventHandler(this.浏览BToolStripMenuItem_Click);
             // 
             // DistributionFrm
             // 
@@ -188,6 +207,7 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -208,5 +228,7 @@
         private System.Windows.Forms.Button BtnOnSell;
         private System.Windows.Forms.CheckBox checkBoxSelectAll;
         private System.Windows.Forms.ColumnHeader columnHeader8;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 浏览BToolStripMenuItem;
     }
 }

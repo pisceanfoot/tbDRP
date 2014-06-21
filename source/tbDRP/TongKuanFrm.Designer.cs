@@ -37,6 +37,7 @@
             this.TxtVender = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.BtnInBrowser = new System.Windows.Forms.Button();
+            this.BtnBrowserProduct = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -119,11 +120,22 @@
             this.BtnInBrowser.UseVisualStyleBackColor = true;
             this.BtnInBrowser.Click += new System.EventHandler(this.BtnInBrowser_Click);
             // 
+            // BtnBrowserProduct
+            // 
+            this.BtnBrowserProduct.Location = new System.Drawing.Point(313, 304);
+            this.BtnBrowserProduct.Name = "BtnBrowserProduct";
+            this.BtnBrowserProduct.Size = new System.Drawing.Size(69, 23);
+            this.BtnBrowserProduct.TabIndex = 5;
+            this.BtnBrowserProduct.Text = "浏览商品";
+            this.BtnBrowserProduct.UseVisualStyleBackColor = true;
+            this.BtnBrowserProduct.Click += new System.EventHandler(this.BtnBrowserProduct_Click);
+            // 
             // TongKuanFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(589, 339);
+            this.Controls.Add(this.BtnBrowserProduct);
             this.Controls.Add(this.BtnInBrowser);
             this.Controls.Add(this.BtnNewTitle);
             this.Controls.Add(this.BtnSearch);
@@ -152,5 +164,6 @@
         private System.Windows.Forms.TextBox TxtVender;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button BtnInBrowser;
+        private System.Windows.Forms.Button BtnBrowserProduct;
     }
 }

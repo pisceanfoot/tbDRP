@@ -46,6 +46,8 @@ namespace tbDRP
             }
         }
 
+        public string ProductID { get; set; }
+
         private void BtnNewTitle_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
@@ -58,6 +60,17 @@ namespace tbDRP
             title = HttpUtility.UrlEncode(title, Context.HttpEncoding);
             string url = "http://s.taobao.com/search?q=" + title;
 
+            Process.Start(url);
+        }
+
+        private void BtnBrowserProduct_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(ProductID))
+            {
+                return;
+            }
+
+            string url = "http://item.taobao.com/item.htm?id=" + ProductID;
             Process.Start(url);
         }
     }

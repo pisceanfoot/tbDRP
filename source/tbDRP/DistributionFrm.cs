@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -134,6 +135,8 @@ namespace tbDRP
                 }
                 i++;
             }
+
+            SetTitle(">>(新标题搜索完成)");
         }
 
         private void SetNewTitle(int index, string newTitle)
@@ -146,10 +149,18 @@ namespace tbDRP
             {
                 ListViewItem item = this.listView.Items[index];
                 item.SubItems[1].Text = newTitle;
-                if (index == this.listView.Items.Count)
-                {
-                    this.TabText += " >> (新标题加载完成)";
-                }
+            }
+        }
+
+        private void SetTitle(string newTitle)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action<string>(SetTitle), newTitle);
+            }
+            else
+            {
+                this.TabText += newTitle;
             }
         }
 
@@ -212,59 +223,68 @@ namespace tbDRP
                 BtnOnSell.Enabled = true;
                 return;
             }
-            if (onSellClickIndex >= list.Count)
+
+            if (onSellClickIndex < list.Count)
             {
-                BtnOnSell.Enabled = true;
-
-                if (editProductFrm != null && !editProductFrm.IsDisposed)
+                for (; onSellClickIndex < list.Count; )
                 {
-                    DockContext.Current.Close(typeof(EditProductFrm));
-                    this.editProductFrm = null;
-                }
-
-                return;
-            }
-
-            for (; onSellClickIndex < list.Count; )
-            {
-                FenXiaoModel model = list[onSellClickIndex];
-                ListViewItem item = listView.Items[onSellClickIndex];
-                if (!item.Checked)
-                {
-                    onSellClickIndex++;
-                    continue;
-                }
-
-                if (!string.IsNullOrEmpty(model.TitleStatus) && string.IsNullOrEmpty(model.NewTitle))
-                {
-                    string title = TongKuan.TongKuanManager.GetNewTitle(model.Title, model.Partener);
-                    if (string.IsNullOrEmpty(title))
+                    FenXiaoModel model = list[onSellClickIndex];
+                    ListViewItem item = listView.Items[onSellClickIndex];
+                    if (!item.Checked)
                     {
-                        // 商家原始名称
-                        model.NewTitle = model.Title;
+                        onSellClickIndex++;
+                        continue;
+                    }
+                    if (model.TitleStatus == "已提交")
+                    {
+                        onSellClickIndex++;
+                        continue;
+                    }
+
+                    if (!string.IsNullOrEmpty(model.TitleStatus) &&
+                        model.TitleStatus != "已提交" &&
+                        string.IsNullOrEmpty(model.NewTitle))
+                    {
+                        string title = TongKuan.TongKuanManager.GetNewTitle(model.Title, model.Partener);
+                        if (string.IsNullOrEmpty(title))
+                        {
+                            // 商家原始名称
+                            model.NewTitle = model.Title;
+                        }
+                        else
+                        {
+                            // 同款销量高的名称
+                            model.NewTitle = title;
+                        }
+                    }
+
+                    onSellClickIndex++;
+
+                    if (editProductFrm == null || editProductFrm.IsDisposed)
+                    {
+                        editProductFrm = DockContext.Current.Show(typeof(EditProductFrm), this) as EditProductFrm;
                     }
                     else
                     {
-                        // 同款销量高的名称
-                        model.NewTitle = title;
+                        if (!editProductFrm.Visible)
+                        {
+                            editProductFrm.Show();
+                        }
                     }
-                }
+                    editProductFrm.Run(model);
 
-                onSellClickIndex++;
+                    item.SubItems[7].Text = "已提交";
+                    model.TitleStatus = "已提交";
+                    return;
+                }
+            }
 
-                if (editProductFrm == null || editProductFrm.IsDisposed)
-                {
-                    editProductFrm = DockContext.Current.Show(typeof(EditProductFrm), this) as EditProductFrm;
-                }
-                else
-                {
-                    if (!editProductFrm.Visible)
-                    {
-                        editProductFrm.Show();
-                    }
-                }
-                editProductFrm.Run(model);
-                break;
+            BtnOnSell.Enabled = true;
+
+            if (editProductFrm != null && !editProductFrm.IsDisposed)
+            {
+                DockContext.Current.Close(typeof(EditProductFrm));
+                this.editProductFrm = null;
             }
         }
 
@@ -275,7 +295,7 @@ namespace tbDRP
             {
                 foreach (ListViewItem item in listView.Items)
                 {
-                    item.Checked = !check;
+                    item.Checked = check;
                 }
             }
         }
@@ -293,7 +313,7 @@ namespace tbDRP
             TongKuanFrm form = new TongKuanFrm();
             form.Title = model.Title;
             form.Vender = model.Partener;
-
+            form.ProductID = model.ID;
             if (form.ShowDialog() == DialogResult.OK)
             {
                 model.NewTitle = form.NewTitle;
@@ -303,6 +323,18 @@ namespace tbDRP
             }
         }
 
-        
+        private void 浏览BToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.listView.SelectedItems == null || this.listView.SelectedItems.Count == 0)
+            {
+                return;
+            }
+
+            ListViewItem item = this.listView.SelectedItems[0];
+            FenXiaoModel model = item.Tag as FenXiaoModel;
+
+            string url = "http://item.taobao.com/item.htm?id=" + model.ID;
+            Process.Start(url);
+        }
     }
 }
