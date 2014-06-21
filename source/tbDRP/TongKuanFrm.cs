@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Web;
 using System.Windows.Forms;
 using tbDRP.Dock;
 using tbDRP.FenXiaoShangPin;
@@ -48,6 +50,15 @@ namespace tbDRP
         {
             this.DialogResult = DialogResult.OK;
             this.Close();
+        }
+
+        private void BtnInBrowser_Click(object sender, EventArgs e)
+        {
+            string title = TxtTitle.Text.Trim();
+            title = HttpUtility.UrlEncode(title, Context.HttpEncoding);
+            string url = "http://s.taobao.com/search?q=" + title;
+
+            Process.Start(url);
         }
     }
 }

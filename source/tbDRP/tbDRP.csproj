@@ -120,6 +120,7 @@
     <Compile Include="MainFrm.Designer.cs">
       <DependentUpon>MainFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ThreadRunner.cs" />
     <Compile Include="UserControls\UCFenXiao.cs">
       <SubType>UserControl</SubType>
     </Compile>

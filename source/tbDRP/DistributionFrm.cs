@@ -107,7 +107,48 @@ namespace tbDRP
                     {
                         webBrowser.DocumentCompleted -= webBrowser_DocumentCompleted;
                         this.TabText = "商品分销管理(加载完成)";
+
+                        ThreadRunner.Run(new Action(SearchNewTitle));
                     }
+                }
+            }
+        }
+
+        private void SearchNewTitle()
+        {
+            if (this.allProductList == null || this.allProductList.Count == 0)
+            {
+                return;
+            }
+
+            int i = 0;
+            foreach (FenXiaoModel model in this.allProductList)
+            {
+                string title = TongKuan.TongKuanManager.GetNewTitle(model.Title, model.Partener);
+                if (!string.IsNullOrEmpty(title))
+                {
+                    // 同款销量高的名称
+                    model.NewTitle = title;
+
+                    SetNewTitle(i, title);
+                }
+                i++;
+            }
+        }
+
+        private void SetNewTitle(int index, string newTitle)
+        {
+            if (this.listView.InvokeRequired)
+            {
+                this.listView.Invoke(new Action<int, string>(SetNewTitle), index, newTitle);
+            }
+            else
+            {
+                ListViewItem item = this.listView.Items[index];
+                item.SubItems[1].Text = newTitle;
+                if (index == this.listView.Items.Count)
+                {
+                    this.TabText += " >> (新标题加载完成)";
                 }
             }
         }
@@ -261,5 +302,7 @@ namespace tbDRP
                 item.SubItems[1].Text = model.NewTitle;
             }
         }
+
+        
     }
 }

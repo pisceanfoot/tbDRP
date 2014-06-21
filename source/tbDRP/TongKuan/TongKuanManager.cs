@@ -10,7 +10,7 @@ namespace tbDRP.TongKuan
 {
     public class TongKuanManager
     {
-        public static string GetNewTitle(string title, string vender)
+        public static string GetNewTitle2(string title, string vender)
         {
             string newTitle = string.Empty;
 
@@ -35,7 +35,7 @@ namespace tbDRP.TongKuan
             return newTitle;
         }
 
-        public static string GetNewTitle1(string title)
+        public static string GetNewTitle(string title, string vender)
         {
             string newTitle = string.Empty;
 
@@ -64,7 +64,7 @@ namespace tbDRP.TongKuan
                 }
 
                 string matchString = "\\<div class=\"similar-btns\"\\>\\n*\\s*\\<span class=\"devide-line\"\\>\\<\\/span\\>\\n*\\s*\\<a target=\"_blank\" href=\"(?<url>.*?)\"";
-                Match match = Regex.Match(body, matchString);
+                Match match = Regex.Match(tmp, matchString);
                 if (match.Success)
                 {
                     string tmpTongkuanUrl = match.Groups["url"].Value;
@@ -79,21 +79,33 @@ namespace tbDRP.TongKuan
                     else
                     {
                         // success
-                        tongkuanUrl = tmpTongkuanUrl;
-                        break;
+                        Match venderMatch = Regex.Match(tmp, "<div class=\"col seller[^>]*>[\\s\\n]*<a[^>]*>(?<name>.*?)</a>");
+                        if (venderMatch.Success)
+                        {
+                            if (venderMatch.Groups["name"].Value.Trim() == vender)
+                            {
+                                tongkuanUrl = tmpTongkuanUrl;
+                                break;
+                            }
+                        }
                     }
                 }
 
                 index = endIndex;
             }
 
-            if (string.IsNullOrEmpty(tongkuanUrl))
-            {
-                tongkuanUrl = tmallTongKuanUrl;
-            }
+            //if (string.IsNullOrEmpty(tongkuanUrl))
+            //{
+            //    tongkuanUrl = tmallTongKuanUrl;
+            //}
             if (!string.IsNullOrEmpty(tongkuanUrl))
             {
                 newTitle = GetTongKuan(url, tongkuanUrl);
+            }
+
+            if (!string.IsNullOrEmpty(newTitle))
+            {
+                newTitle = newTitle.Replace("包邮", string.Empty);
             }
 
             return newTitle;

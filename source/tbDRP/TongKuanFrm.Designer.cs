@@ -36,6 +36,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.TxtVender = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.BtnInBrowser = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -108,11 +109,22 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "* 新标题";
             // 
+            // BtnInBrowser
+            // 
+            this.BtnInBrowser.Location = new System.Drawing.Point(412, 72);
+            this.BtnInBrowser.Name = "BtnInBrowser";
+            this.BtnInBrowser.Size = new System.Drawing.Size(75, 23);
+            this.BtnInBrowser.TabIndex = 5;
+            this.BtnInBrowser.Text = "浏览器查看";
+            this.BtnInBrowser.UseVisualStyleBackColor = true;
+            this.BtnInBrowser.Click += new System.EventHandler(this.BtnInBrowser_Click);
+            // 
             // TongKuanFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(589, 339);
+            this.Controls.Add(this.BtnInBrowser);
             this.Controls.Add(this.BtnNewTitle);
             this.Controls.Add(this.BtnSearch);
             this.Controls.Add(this.TxtNewTitle);
@@ -139,5 +151,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox TxtVender;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button BtnInBrowser;
     }
 }
