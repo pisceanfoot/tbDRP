@@ -61,11 +61,14 @@ namespace tbDRP
             ClickHelemnt(submit);
 
             this.checkDownTimer.Start();
+            checkDownTimes = 0;
         }
 
+        private int checkDownTimes = 0;
         private void checkDownTimer_Tick(object sender, EventArgs e)
         {
             checkDownTimer.Enabled = false;
+            checkDownTimes++;
 
             if (!this.editProductBrowser.Browser.Busy)
             {
@@ -74,6 +77,11 @@ namespace tbDRP
 
                 }
 
+                this.parentFrm.SetOnSell();
+                return;
+            }
+            if (checkDownTimes >= 10)
+            {
                 this.parentFrm.SetOnSell();
                 return;
             }
