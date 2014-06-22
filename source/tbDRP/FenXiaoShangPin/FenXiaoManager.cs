@@ -200,6 +200,7 @@ namespace tbDRP.FenXiaoShangPin
             GroupCollection priceCol = RegexUtils.Match(content, "<span class=\"label-like\">利润区间：</span>[\\s\\n]*(?<f>\\<span class=\"ex-knockout-r\"[^>]+>[\\s\\n]*-)?[\\s\\n]*<em>(?<from>.*)</em>[\\s\\n]*~[\\s\\n]*<em>(?<to>.*?)</em>");
             model.PriceFrom = priceCol["from"].Value;
             model.PriceTo = priceCol["to"].Value;
+            model.F = priceCol["f"].Value;
 
             model.Inventory = NetDataManager.GetContent(content, "库存:", "\">", "</span>");
             if (!string.IsNullOrEmpty(model.Inventory))
