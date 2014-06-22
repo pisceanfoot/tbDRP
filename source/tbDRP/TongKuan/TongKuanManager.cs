@@ -111,6 +111,84 @@ namespace tbDRP.TongKuan
             return newTitle;
         }
 
+        public static string GetNewTitleByCode(string code)
+        {
+            string newTitle = string.Empty;
+
+            string url = string.Format("http://s.taobao.com/search?q={0}", HttpUtility.UrlEncode(code, Context.HttpEncoding));
+            string content = NetDataManager.GetString(url);
+
+            string body = NetDataManager.GetContent(content, "class=\"tb-content\"", "class=\"row grid-view newsrp-gridcontent-el\"", "<div class=\"tb-bottom\">");
+
+            string tmallTongKuanUrl = null;
+            string tongkuanUrl = null;
+
+            const string find = "<div class=\"col item st-item";
+            int index = body.IndexOf(find);
+            while (index != -1)
+            {
+                int endIndex = body.IndexOf(find, index + find.Length);
+
+                string tmp;
+                if (endIndex == -1)
+                {
+                    tmp = body.Substring(index);
+                }
+                else
+                {
+                    tmp = body.Substring(index, endIndex - index);
+                }
+
+                string matchString = "\\<div class=\"similar-btns\"\\>\\n*\\s*\\<span class=\"devide-line\"\\>\\<\\/span\\>\\n*\\s*\\<a target=\"_blank\" href=\"(?<url>.*?)\"";
+                Match match = Regex.Match(tmp, matchString);
+                if (match.Success)
+                {
+                    string tmpTongkuanUrl = match.Groups["url"].Value;
+
+                    if (tmp.Contains("icon-service-tianmao"))
+                    {
+                        if (tmallTongKuanUrl == null)
+                        {
+                            tmallTongKuanUrl = tmpTongkuanUrl;
+                        }
+                    }
+                    else
+                    {
+                        // success
+                        Match venderMatch = Regex.Match(tmp, "<div class=\"col seller[^>]*>[\\s\\n]*<a[^>]*>(?<name>.*?)</a>");
+                        if (venderMatch.Success)
+                        {
+                            // TODO:
+
+                            //if (venderMatch.Groups["name"].Value.Trim() == vender)
+                            //{
+                            //    tongkuanUrl = tmpTongkuanUrl;
+                            //    break;
+                            //}
+                        }
+                    }
+                }
+
+                index = endIndex;
+            }
+
+            //if (string.IsNullOrEmpty(tongkuanUrl))
+            //{
+            //    tongkuanUrl = tmallTongKuanUrl;
+            //}
+            if (!string.IsNullOrEmpty(tongkuanUrl))
+            {
+                newTitle = GetTongKuan(url, tongkuanUrl);
+            }
+
+            if (!string.IsNullOrEmpty(newTitle))
+            {
+                newTitle = newTitle.Replace("包邮", string.Empty);
+            }
+
+            return newTitle;
+        }
+
         private static string GetTongKuan(string mainUrl, string url)
         {
             string newTitle = string.Empty;

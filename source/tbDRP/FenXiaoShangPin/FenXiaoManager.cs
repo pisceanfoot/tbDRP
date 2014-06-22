@@ -197,6 +197,12 @@ namespace tbDRP.FenXiaoShangPin
             model.ID = titleCol["id"].Value;
             model.Title = titleCol["title"].Value;
 
+            model.Code = NetDataManager.GetContent(content, "", "商家编码：", "<");
+            if (!string.IsNullOrEmpty(model.Code))
+            {
+                model.Code = model.Code.Trim();
+            }
+
             GroupCollection priceCol = RegexUtils.Match(content, "<span class=\"label-like\">利润区间：</span>[\\s\\n]*(?<f>\\<span class=\"ex-knockout-r\"[^>]+>[\\s\\n]*-)?[\\s\\n]*<em>(?<from>.*)</em>[\\s\\n]*~[\\s\\n]*<em>(?<to>.*?)</em>");
             model.PriceFrom = priceCol["from"].Value;
             model.PriceTo = priceCol["to"].Value;
