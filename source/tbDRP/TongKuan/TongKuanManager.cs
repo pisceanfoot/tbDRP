@@ -10,7 +10,7 @@ namespace tbDRP.TongKuan
 {
     public class TongKuanManager
     {
-        public static string GetNewTitle2(string title, string vender)
+        public static string GetNewTitle2(string title)
         {
             string newTitle = string.Empty;
 

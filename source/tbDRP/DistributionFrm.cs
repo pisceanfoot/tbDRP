@@ -136,6 +136,33 @@ namespace tbDRP
                 i++;
             }
 
+            SetTitle(">>(新标题搜索完成2)");
+        }
+
+        private void SearchNewTitleM2()
+        {
+            if (this.allProductList == null || this.allProductList.Count == 0)
+            {
+                return;
+            }
+
+            int i = 0;
+            foreach (FenXiaoModel model in this.allProductList)
+            {
+                if (string.IsNullOrEmpty(model.NewTitle))
+                {
+                    string title = TongKuan.TongKuanManager.GetNewTitle2(model.Title);
+                    if (!string.IsNullOrEmpty(title))
+                    {
+                        // 同款销量高的名称
+                        model.NewTitle = title;
+
+                        SetNewTitle(i, title);
+                    }
+                }
+                i++;
+            }
+
             SetTitle(">>(新标题搜索完成)");
         }
 
@@ -314,6 +341,7 @@ namespace tbDRP
             form.Title = model.Title;
             form.Vender = model.Partener;
             form.ProductID = model.ID;
+            form.NewTitle = model.NewTitle;
             if (form.ShowDialog() == DialogResult.OK)
             {
                 model.NewTitle = form.NewTitle;
@@ -335,6 +363,12 @@ namespace tbDRP
 
             string url = "http://item.taobao.com/item.htm?id=" + model.ID;
             Process.Start(url);
+        }
+
+        private void BtnChangeTitleM2_Click(object sender, EventArgs e)
+        {
+            this.TabText = "开始执行方法2";
+            ThreadRunner.Run(new Action(SearchNewTitleM2));
         }
     }
 }

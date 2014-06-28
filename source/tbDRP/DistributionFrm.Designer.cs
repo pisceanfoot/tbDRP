@@ -45,6 +45,7 @@
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.浏览BToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BtnChangeTitleM2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -63,6 +64,7 @@
             // 
             this.splitContainer1.Panel1.Controls.Add(this.checkBoxSelectAll);
             this.splitContainer1.Panel1.Controls.Add(this.BtnOnSell);
+            this.splitContainer1.Panel1.Controls.Add(this.BtnChangeTitleM2);
             this.splitContainer1.Panel1.Controls.Add(this.BtnChangeTitle);
             this.splitContainer1.Panel1.Controls.Add(this.BtnRefresh);
             // 
@@ -183,14 +185,24 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.浏览BToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(126, 26);
             // 
             // 浏览BToolStripMenuItem
             // 
             this.浏览BToolStripMenuItem.Name = "浏览BToolStripMenuItem";
-            this.浏览BToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.浏览BToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.浏览BToolStripMenuItem.Text = "浏览(&B)...";
             this.浏览BToolStripMenuItem.Click += new System.EventHandler(this.浏览BToolStripMenuItem_Click);
+            // 
+            // BtnChangeTitleM2
+            // 
+            this.BtnChangeTitleM2.Location = new System.Drawing.Point(321, 26);
+            this.BtnChangeTitleM2.Name = "BtnChangeTitleM2";
+            this.BtnChangeTitleM2.Size = new System.Drawing.Size(75, 50);
+            this.BtnChangeTitleM2.TabIndex = 0;
+            this.BtnChangeTitleM2.Text = "自动修改\r\n\r\n标题2";
+            this.BtnChangeTitleM2.UseVisualStyleBackColor = true;
+            this.BtnChangeTitleM2.Click += new System.EventHandler(this.BtnChangeTitleM2_Click);
             // 
             // DistributionFrm
             // 
@@ -230,5 +242,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader8;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 浏览BToolStripMenuItem;
+        private System.Windows.Forms.Button BtnChangeTitleM2;
     }
 }

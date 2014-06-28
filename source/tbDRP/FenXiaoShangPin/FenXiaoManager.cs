@@ -85,13 +85,14 @@ namespace tbDRP.FenXiaoShangPin
             string table = NetDataManager.GetContent(content, "J_Relationship", ">", "</table>");
 
             const string tr = "<tr>";
+            const string endstr = "<tr class=\"row-sp\">";
 
             int index = table.IndexOf(tr);
             while (index != -1)
             {
                 string tmp;
 
-                int endIndex = table.IndexOf(tr, index + tr.Length);
+                int endIndex = table.IndexOf(endstr, index + tr.Length);
                 if (endIndex == -1)
                 {
                     tmp = table.Substring(index);
@@ -107,7 +108,7 @@ namespace tbDRP.FenXiaoShangPin
                     list.Add(model);
                 }
 
-                index = table.IndexOf(tr, index + tr.Length);
+                index = endIndex;
             }
 
             return list;
@@ -117,11 +118,11 @@ namespace tbDRP.FenXiaoShangPin
         {
             VenderModel model = new VenderModel();
 
-            GroupCollection venderCol = RegexUtils.Match(content, "<td class=\"cell-supplier\">[\\s\\n]*<a href=\"/browse/shop_home.htm\\?supplierId=(?<id>\\d+?)\"[^>]*>(?<name>.*?)</a>");
+            GroupCollection venderCol = RegexUtils.Match(content, "class=\"cell-supplier\">[\\s\\n]*<a href=\"/browse/shop_home.htm\\?supplierId=(?<id>\\d+?)\"[^>]*>(?<name>.*?)</a>");
             model.ID = venderCol["id"].Value;
             model.Name = venderCol["name"].Value;
 
-            string shortNameHtml = NetDataManager.GetContent(content, "", "<td class=\"cell-supplier\">", "</td>");
+            string shortNameHtml = NetDataManager.GetContent(content, "<td", "class=\"cell-supplier\">", "</td>");
             shortNameHtml = Regex.Replace(shortNameHtml, "<[^<>]+>", "-_-");
             string[] shortArray = shortNameHtml.Split(new string[] { "-_-" }, StringSplitOptions.RemoveEmptyEntries);
 
@@ -146,7 +147,7 @@ namespace tbDRP.FenXiaoShangPin
             }
             if (dateArray.Length > 1)
             {
-                model.EndDate = dateArray[1];
+                model.EndDate = dateArray[1].Trim();
             }
             #endregion
 
@@ -212,6 +213,23 @@ namespace tbDRP.FenXiaoShangPin
             if (!string.IsNullOrEmpty(model.Inventory))
             {
                 model.Inventory = model.Inventory.Trim();
+                if (model.Inventory != "有货" && model.Inventory != "部分缺货")
+                {
+                    model.Inventory = NetDataManager.GetContent(content, "", "库存:", "<");
+                    if (!string.IsNullOrEmpty(model.Inventory))
+                    {
+                        model.Inventory = model.Inventory.Trim();
+                        int count;
+                        if (int.TryParse(model.Inventory, out count))
+                        {
+                            model.Inventory = count > 0 ? "有货" : "部分缺货";
+                        }
+                        else
+                        {
+                            model.Inventory = "部分缺货";
+                        }
+                    }
+                }
             }
 
             model.SellCount = NetDataManager.GetContent(content, "", "<span>成交", "笔</span>");

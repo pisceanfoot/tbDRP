@@ -44,6 +44,10 @@ namespace tbDRP
             {
                 return this.TxtNewTitle.Text;
             }
+            set
+            {
+                this.TxtNewTitle.Text = value;
+            }
         }
 
         public string ProductID { get; set; }
