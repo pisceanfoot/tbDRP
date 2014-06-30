@@ -31,7 +31,7 @@ namespace tbDRP
             this.Controls.Add(this.editProductBrowser.Browser);
 
             checkDownTimer = new Timer();
-            checkDownTimer.Interval = 800;
+            checkDownTimer.Interval = 900;
             checkDownTimer.Tick += checkDownTimer_Tick;
             checkDownTimer.Enabled = false;
 
@@ -55,6 +55,38 @@ namespace tbDRP
             {
                 HtmlElement element = this.editProductBrowser.Browser.Document.GetElementById("TitleID");
                 element.SetAttribute("value", model.NewTitle);
+            }
+
+            if (model.ChangePrice != 0)
+            {
+                HtmlElement element = this.editProductBrowser.FindID("buynow");
+                string price = element.GetAttribute("value");
+
+                decimal oPrice;
+                if (decimal.TryParse(price, out oPrice))
+                {
+                    this.editProductBrowser.ClickHelemnt(element); 
+                    element.SetAttribute("value", (model.ChangePrice + oPrice).ToString());
+                }
+                HtmlElement container = this.editProductBrowser.FindID("J_SKUMapContainer");
+                if (container != null)
+                {
+                    HtmlElementCollection itemPrice = container.GetElementsByTagName("input");
+                    foreach (HtmlElement item in itemPrice)
+                    {
+                        string className = item.GetAttribute("className");
+                        if (className != null && className.Contains("J_MapPrice"))
+                        {
+                            price = item.GetAttribute("value");
+                            if (decimal.TryParse(price, out oPrice))
+                            {
+                                this.editProductBrowser.ClickHelemnt(item); 
+                                item.SetAttribute("value", (model.ChangePrice + oPrice).ToString());
+                            }
+                        }
+                    }
+                }
+                
             }
 
             HtmlElement submit = this.editProductBrowser.Browser.Document.GetElementById("event_submit_do_edit");

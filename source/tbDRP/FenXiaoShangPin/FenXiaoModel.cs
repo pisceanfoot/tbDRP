@@ -42,5 +42,7 @@ namespace tbDRP.FenXiaoShangPin
         public string UpdateDate { get; set; }
 
         public string F { get; set; }
+
+        public decimal ChangePrice { get; set; }
     }
 }

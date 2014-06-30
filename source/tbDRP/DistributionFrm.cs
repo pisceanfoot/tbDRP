@@ -284,6 +284,10 @@ namespace tbDRP
                             model.NewTitle = title;
                         }
                     }
+                    if (numericUpdatePrice.Value != 0)
+                    {
+                        model.ChangePrice = numericUpdatePrice.Value;
+                    }
 
                     onSellClickIndex++;
 
