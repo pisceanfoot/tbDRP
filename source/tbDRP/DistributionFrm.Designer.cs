@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.label1 = new System.Windows.Forms.Label();
+            this.numericUpdatePrice = new System.Windows.Forms.NumericUpDown();
             this.checkBoxSelectAll = new System.Windows.Forms.CheckBox();
             this.BtnOnSell = new System.Windows.Forms.Button();
             this.BtnChangeTitleM2 = new System.Windows.Forms.Button();
@@ -46,14 +48,13 @@
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.浏览BToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.numericUpdatePrice = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
+            this.BtnReset = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpdatePrice)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -65,6 +66,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.BtnReset);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
             this.splitContainer1.Panel1.Controls.Add(this.numericUpdatePrice);
             this.splitContainer1.Panel1.Controls.Add(this.checkBoxSelectAll);
@@ -79,6 +81,27 @@
             this.splitContainer1.Size = new System.Drawing.Size(962, 610);
             this.splitContainer1.SplitterDistance = 107;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(429, 28);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 12);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "价格调整：";
+            // 
+            // numericUpdatePrice
+            // 
+            this.numericUpdatePrice.Location = new System.Drawing.Point(431, 55);
+            this.numericUpdatePrice.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.numericUpdatePrice.Name = "numericUpdatePrice";
+            this.numericUpdatePrice.Size = new System.Drawing.Size(71, 21);
+            this.numericUpdatePrice.TabIndex = 2;
             // 
             // checkBoxSelectAll
             // 
@@ -209,26 +232,15 @@
             this.浏览BToolStripMenuItem.Text = "浏览(&B)...";
             this.浏览BToolStripMenuItem.Click += new System.EventHandler(this.浏览BToolStripMenuItem_Click);
             // 
-            // numericUpdatePrice
+            // BtnReset
             // 
-            this.numericUpdatePrice.Location = new System.Drawing.Point(431, 55);
-            this.numericUpdatePrice.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            -2147483648});
-            this.numericUpdatePrice.Name = "numericUpdatePrice";
-            this.numericUpdatePrice.Size = new System.Drawing.Size(71, 21);
-            this.numericUpdatePrice.TabIndex = 2;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(429, 28);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 12);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "价格调整：";
+            this.BtnReset.Location = new System.Drawing.Point(554, 26);
+            this.BtnReset.Name = "BtnReset";
+            this.BtnReset.Size = new System.Drawing.Size(75, 49);
+            this.BtnReset.TabIndex = 4;
+            this.BtnReset.Text = "重新上架";
+            this.BtnReset.UseVisualStyleBackColor = true;
+            this.BtnReset.Click += new System.EventHandler(this.BtnReset_Click);
             // 
             // DistributionFrm
             // 
@@ -245,8 +257,8 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpdatePrice)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -272,5 +284,6 @@
         private System.Windows.Forms.Button BtnChangeTitleM2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown numericUpdatePrice;
+        private System.Windows.Forms.Button BtnReset;
     }
 }

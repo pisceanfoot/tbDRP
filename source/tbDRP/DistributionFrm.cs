@@ -374,5 +374,10 @@ namespace tbDRP
             this.TabText = "开始执行方法2";
             ThreadRunner.Run(new Action(SearchNewTitleM2));
         }
+
+        private void BtnReset_Click(object sender, EventArgs e)
+        {
+            BtnOnSell.Enabled = true;
+        }
     }
 }
