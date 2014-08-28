@@ -54,6 +54,11 @@ namespace tbDRP
             if (!string.IsNullOrEmpty(model.TitleStatus))
             {
                 HtmlElement element = this.editProductBrowser.Browser.Document.GetElementById("TitleID");
+                if (element == null)
+                {
+                    return;
+                }
+
                 element.SetAttribute("value", model.NewTitle);
             }
 
