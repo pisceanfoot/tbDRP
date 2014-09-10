@@ -14,7 +14,7 @@ namespace tbDRP.TongKuan
         {
             string newTitle = string.Empty;
 
-            string url = string.Format("http://s.taobao.com/search?q={0}", HttpUtility.UrlEncode(title, Context.HttpEncoding));
+            string url = string.Format("http://s.taobao.com/search?q={0}&app=detail", HttpUtility.UrlEncode(title, Context.HttpEncoding));
             string content = NetDataManager.GetString(url);
 
             string body = NetDataManager.GetContent(content, "class=\"tb-content\"", "class=\"row grid-view newsrp-gridcontent-el\"", "<div class=\"tb-bottom\">");
@@ -39,7 +39,7 @@ namespace tbDRP.TongKuan
         {
             string newTitle = string.Empty;
 
-            string url = string.Format("http://s.taobao.com/search?q={0}", HttpUtility.UrlEncode(title, Context.HttpEncoding));
+            string url = string.Format("http://s.taobao.com/search?q={0}&app=detail", HttpUtility.UrlEncode(title, Context.HttpEncoding));
             string content = NetDataManager.GetString(url);
 
             string body = NetDataManager.GetContent(content, "class=\"tb-content\"", "class=\"row grid-view newsrp-gridcontent-el\"", "<div class=\"tb-bottom\">");
