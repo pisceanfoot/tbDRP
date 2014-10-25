@@ -37,7 +37,7 @@ namespace tbDRP
 
             this.clickTimer = new Timer();
             this.clickTimer.Tick += clickTimer_Tick;
-            this.clickTimer.Interval = 700;
+            this.clickTimer.Interval = 2000;
             this.clickTimer.Enabled = false;
         }
 
@@ -94,6 +94,10 @@ namespace tbDRP
                 
             }
 
+
+            HtmlElement promoted = this.editProductBrowser.FindID("promoted");
+            ClickHelemnt(promoted);
+
             HtmlElement submit = this.editProductBrowser.Browser.Document.GetElementById("event_submit_do_edit");
             ClickHelemnt(submit);
 
@@ -111,13 +115,11 @@ namespace tbDRP
             {
                 if (this.editProductBrowser.Browser.Url.AbsolutePath.IndexOf("item.htm?id=") != -1)
                 {
-
+                    this.parentFrm.SetOnSell();
+                    return;
                 }
-
-                this.parentFrm.SetOnSell();
-                return;
             }
-            if (checkDownTimes >= 10)
+            if (checkDownTimes >= 15)
             {
                 this.parentFrm.SetOnSell();
                 return;
@@ -130,6 +132,9 @@ namespace tbDRP
         {
             if (browser.Task == "EditProduct")
             {
+                //HtmlElement promoted = this.editProductBrowser.FindID("promoted");
+                //ClickHelemnt(promoted);
+
                 this.clickTimer.Start();
                 browser.Task = "";
             }

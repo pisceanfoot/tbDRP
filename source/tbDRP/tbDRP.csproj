@@ -120,6 +120,12 @@
     <Compile Include="MainFrm.Designer.cs">
       <DependentUpon>MainFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TestFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestFrm.Designer.cs">
+      <DependentUpon>TestFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ThreadRunner.cs" />
     <Compile Include="UserControls\UCFenXiao.cs">
       <SubType>UserControl</SubType>
@@ -175,6 +181,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainFrm.resx">
       <DependentUpon>MainFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestFrm.resx">
+      <DependentUpon>TestFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UCFenXiao.resx">
       <DependentUpon>UCFenXiao.cs</DependentUpon>
