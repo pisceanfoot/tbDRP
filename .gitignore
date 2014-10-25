@@ -10,3 +10,4 @@ bin/*
 *.pdsync
 TestResults.*
 /TestResults/*.trx
+Debug/*
