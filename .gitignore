@@ -11,3 +11,4 @@ bin/*
 TestResults.*
 /TestResults/*.trx
 Debug/*
+**/packages/*
