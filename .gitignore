@@ -12,3 +12,4 @@ TestResults.*
 /TestResults/*.trx
 Debug/*
 **/packages/*
+*.userprefs
