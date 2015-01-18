@@ -28,7 +28,8 @@ namespace tbDRP
             this.editProductBrowser.DocumentComplete += editProductBrowser_DocumentComplete;
 
             this.editProductBrowser.Browser.Dock = DockStyle.Fill;
-            this.Controls.Add(this.editProductBrowser.Browser);
+
+            this.splitContainer1.Panel2.Controls.Add(this.editProductBrowser.Browser);
 
             checkDownTimer = new Timer();
             checkDownTimer.Interval = 900;
@@ -37,7 +38,7 @@ namespace tbDRP
 
             this.clickTimer = new Timer();
             this.clickTimer.Tick += clickTimer_Tick;
-            this.clickTimer.Interval = 2000;
+            this.clickTimer.Interval = 3000;
             this.clickTimer.Enabled = false;
         }
 
@@ -98,11 +99,11 @@ namespace tbDRP
             HtmlElement promoted = this.editProductBrowser.FindID("promoted");
             ClickHelemnt(promoted);
 
-            HtmlElement submit = this.editProductBrowser.Browser.Document.GetElementById("event_submit_do_edit");
-            ClickHelemnt(submit);
+            //HtmlElement submit = this.editProductBrowser.Browser.Document.GetElementById("event_submit_do_edit");
+            //ClickHelemnt(submit);
 
-            this.checkDownTimer.Start();
-            checkDownTimes = 0;
+            //this.checkDownTimer.Start();
+            //checkDownTimes = 0;
         }
 
         private int checkDownTimes = 0;
@@ -132,9 +133,6 @@ namespace tbDRP
         {
             if (browser.Task == "EditProduct")
             {
-                //HtmlElement promoted = this.editProductBrowser.FindID("promoted");
-                //ClickHelemnt(promoted);
-
                 this.clickTimer.Start();
                 browser.Task = "";
             }
@@ -168,6 +166,11 @@ namespace tbDRP
         public void Focus(HtmlElement h)
         {
             h.Focus();
+        }
+
+        private void BtnNext_Click(object sender, EventArgs e)
+        {
+            this.parentFrm.SetOnSell();
         }
     }
 }
