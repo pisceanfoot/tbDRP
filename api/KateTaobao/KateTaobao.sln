@@ -1,13 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kate", "Kate\Kate.csproj", "{B055A38C-E113-49DE-AF38-02B5776C3BF2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TopSdk", "TaobaoSDK\TopSdk.csproj", "{9C11CAE5-5188-4E71-825B-68FC3135728A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kate.UI", "Kate.UI\Kate.UI.csproj", "{F04600E0-7820-4861-BBCD-F6D51F3156FC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kate.UI", "Kate.UI\Kate.UI.csproj", "{3BF37547-3D9F-4D20-8DD5-8BEF0B9C93A5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C9D6DC7F-73C4-4FC6-9A5B-6E2961D28018}"
 	ProjectSection(SolutionItems) = preProject
@@ -28,10 +26,10 @@ Global
 		{9C11CAE5-5188-4E71-825B-68FC3135728A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C11CAE5-5188-4E71-825B-68FC3135728A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C11CAE5-5188-4E71-825B-68FC3135728A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F04600E0-7820-4861-BBCD-F6D51F3156FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F04600E0-7820-4861-BBCD-F6D51F3156FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F04600E0-7820-4861-BBCD-F6D51F3156FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F04600E0-7820-4861-BBCD-F6D51F3156FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BF37547-3D9F-4D20-8DD5-8BEF0B9C93A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BF37547-3D9F-4D20-8DD5-8BEF0B9C93A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BF37547-3D9F-4D20-8DD5-8BEF0B9C93A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BF37547-3D9F-4D20-8DD5-8BEF0B9C93A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
